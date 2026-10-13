@@ -1,0 +1,275 @@
+{
+  "reference": {
+    "name": "Azumo — About Us",
+    "url": "https://azumo.com/us"
+  },
+  "path": "/about",
+  "seo": {
+    "title": "About Us — Our Story, Team & Milestones",
+    "description": "Learn how IncubXperts grew into an AI-native engineering partner, our journey, key milestones, and the team behind our AI-first delivery.",
+    "schemaType": "AboutPage",
+    "summary": "IncubXperts, founded 2017, is an AI-native engineering partner with 150+ experts and 95% client retention."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "light",
+      "eyebrow": "About IncubXperts",
+      "title": "Leaders in technology, partners in progress",
+      "subtitle": "Founded in 2017, we have grown into an AI-native engineering partner for product companies and enterprises."
+    },
+    {
+      "type": "richText",
+      "bg": "light",
+      "eyebrow": "How we got our start",
+      "heading": "A decade of building intelligent software",
+      "paragraphs": [
+        "IncubXperts was established in 2017 as a private limited organisation, with a focus on helping companies design, build and scale software that matters.",
+        "Marked 10 years of IncubXperts, a decade of building AI-native software and technology solutions. Scaled our AI Bootcamp program threefold, from 36 to 99 associates, shipping working AI agents across document processing, remittance automation, loan underwriting, and Salesforce-based sales workflows.",
+        "IncubXperts embraces its identity as an AI-native engineering partner, integrating AI into how we operate, design, build, and deliver systems with a focus on purpose-built solutions that create real impact."
+      ],
+      "callout": {
+        "title": "Registered Anthropic partner",
+        "body": "We deepen our agentic AI expertise through Claude ecosystem training and certification."
+      },
+      "media": {
+        "side": "right",
+        "image": {
+          "src": "https://incubxperts.com/images/header/whoweare.webp",
+          "alt": "The IncubXperts team"
+        }
+      }
+    },
+    {
+      "type": "stats",
+      "bg": "dark",
+      "layout": "split",
+      "eyebrow": "IncubXperts at a glance",
+      "heading": "A proven partner for AI-native engineering",
+      "intro": "IncubXperts is an AI-native engineering partner for product companies and enterprises, helping them design, build, and scale intelligent software.",
+      "items": [
+        {
+          "value": "150+",
+          "label": "Experts",
+          "note": "Welcomed our 150th IX'ian in 2025"
+        },
+        {
+          "value": "95%",
+          "label": "Client Retention Rate"
+        },
+        {
+          "value": "100%",
+          "label": "Debt Free Organization"
+        },
+        {
+          "value": "55%",
+          "label": "CAGR Since 2021"
+        },
+        {
+          "value": "2017",
+          "label": "Year founded",
+          "note": "Headquartered in Pune, India"
+        },
+        {
+          "value": "10 years",
+          "label": "Building AI-native software",
+          "note": "A decade of intelligent software"
+        }
+      ]
+    },
+    {
+      "type": "badges",
+      "bg": "surface",
+      "eyebrow": "Recognition and partnerships",
+      "heading": "Certified, connected and accountable",
+      "items": [
+        {
+          "name": "Registered Anthropic partner"
+        },
+        {
+          "name": "Certifications in AWS, Azure, UX, Dynamics 365, and Power Apps"
+        },
+        {
+          "name": "NASSCOM member"
+        },
+        {
+          "name": "Equal Opportunity Employer"
+        },
+        {
+          "name": "Ploko",
+          "label": "Partner"
+        },
+        {
+          "name": "Sustainity",
+          "label": "Partner"
+        },
+        {
+          "name": "Anthropic",
+          "label": "Partner"
+        }
+      ]
+    },
+    {
+      "type": "testimonials",
+      "variant": "carousel",
+      "split": true,
+      "bg": "light",
+      "eyebrow": "Customers",
+      "heading": "Leaders prefer us",
+      "intro": "Product companies and enterprises trust IncubXperts to build and scale their software.",
+      "cta": {
+        "label": "See our work",
+        "href": "/work"
+      }
+    },
+    {
+      "type": "tabs",
+      "layout": "rail",
+      "bg": "surface",
+      "eyebrow": "How we deliver",
+      "heading": "What makes IncubXperts different",
+      "tabs": [
+        {
+          "label": "AI-native advantage",
+          "title": "AI-native by design",
+          "body": "At IncubXperts, outcomes set us apart. As an AI-native engineering partner, we bring together reliable delivery, high-performing teams, and responsible AI practices to create solutions that deliver measurable business impact.",
+          "points": [
+            "AI Native by Design",
+            "Faster Delivery with AI and HITL",
+            "ROI and TCO Led Engineering"
+          ]
+        },
+        {
+          "label": "Accelerators",
+          "title": "Accelerators that save time and money",
+          "body": "Our accelerators and methods ensure predictable, high-quality results with speed, stability, and unmatched ROI.",
+          "points": [
+            "UI Toolkit",
+            "StoreUp",
+            "Automation Accelerators"
+          ]
+        },
+        {
+          "label": "Methods & governance",
+          "title": "Methods that keep delivery predictable",
+          "body": "Practices that keep delivery predictable and AI use responsible.",
+          "points": [
+            "Business Intent Driven Development (BIDD)",
+            "Talent Acquisition Blueprint",
+            "Self-sustaining Teams",
+            "Communication Improvement",
+            "Technical Audits",
+            "Responsible AI Governance",
+            "AI Observability and Quality Controls"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "process",
+      "bg": "light",
+      "eyebrow": "Engagement models",
+      "heading": "Work with us the way that suits you",
+      "steps": [
+        {
+          "title": "Time and Materials (T&M)",
+          "body": "Extend your team with the flexibility to ramp up or down as needed. Ideal for projects with evolving requirements or iterative development needs."
+        },
+        {
+          "title": "Pilot Project",
+          "body": "Our no-commitment trial service period, which will give you an insight into our process, our work ethics, and help you evaluate a fit."
+        },
+        {
+          "title": "Milestone-based Model",
+          "body": "A combination of T&M and FP - we usually advise this where there is progressive clarity on scope."
+        },
+        {
+          "title": "Fixed Price",
+          "body": "We adopt this model when the project scope is well-defined and the work aligns closely with our core areas of expertise."
+        },
+        {
+          "title": "PureShore",
+          "body": "Our volume business model specifically created for large teams. Delivers the best ROI by leveraging economies of scale."
+        },
+        {
+          "title": "Managed Services",
+          "body": "We own the business function and deliver selected services with a focus on reliability, scalability, and SLA-driven outcomes."
+        }
+      ]
+    },
+    {
+      "type": "cardGrid",
+      "variant": "portrait",
+      "bg": "surface",
+      "eyebrow": "Leadership",
+      "heading": "The team behind IncubXperts",
+      "items": [
+        {
+          "title": "Anish Betawadkar",
+          "tag": "Co-Founder & Director",
+          "body": "A recreational cyclist, Anish has been fitness inclined for the past few years. He bikes to work a couple of times a week, and on other days he…",
+          "image": {
+            "src": "https://incubxperts.com/images/Leadership/anish.webp",
+            "alt": "Anish Betawadkar, Co-Founder & Director at IncubXperts"
+          }
+        },
+        {
+          "title": "Dr. Preetam Tiwari",
+          "tag": "Co-Founder & Director",
+          "body": "An Artist by heart, by brain, and by everything you can go by….yes, he doesn’t spare technology too!",
+          "image": {
+            "src": "https://incubxperts.com/images/Leadership/preetamimg.webp",
+            "alt": "Dr. Preetam Tiwari, Co-Founder & Director at IncubXperts"
+          }
+        },
+        {
+          "title": "Rahul Bagal",
+          "tag": "Co-Founder & Director",
+          "body": "If Rahul was not a technologist, he would have been a High Tech farmer! He has a great interest in soil, farming, and harvesting crops.",
+          "image": {
+            "src": "https://incubxperts.com/images/Leadership/rahulimg.webp",
+            "alt": "Rahul Bagal, Co-Founder & Director at IncubXperts"
+          }
+        },
+        {
+          "title": "Amit Dhandal",
+          "tag": "Co-Founder & Director",
+          "body": "A trekker and foodie, Amit loves to apply his analytical skills everywhere. With his apt sense of Indian politics and vast general knowledge, you can…",
+          "image": {
+            "src": "https://incubxperts.com/images/AboutUs/amitsir.webp",
+            "alt": "Amit Dhandal, Co-Founder & Director at IncubXperts"
+          }
+        }
+      ]
+    },
+    {
+      "type": "locations",
+      "bg": "light",
+      "heading": "Our offices",
+      "items": [
+        {
+          "city": "Pune, India",
+          "detail": "Office No 1, Level 5, Building B1, Symphony IT Park, Nanded City, Pune , Maharashtra, India 411068"
+        },
+        {
+          "city": "Delaware, USA",
+          "detail": "Corporation Trust Center, 1209, Orange Street, Wilmington, New Castle, Delaware, USA 19801"
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Let's build together",
+      "heading": "Ready to put AI to work in your business?",
+      "body": "Tell us about your challenge and our experts will show you how we would approach it.",
+      "primary": {
+        "label": "Speak with us",
+        "href": "/contact"
+      },
+      "secondary": {
+        "label": "See our work",
+        "href": "/work"
+      }
+    }
+  ]
+}
