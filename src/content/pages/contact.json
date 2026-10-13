@@ -1,0 +1,54 @@
+{
+  "path": "/contact",
+  "seo": {
+    "title": "Contact Us — Pune & Delaware Offices",
+    "description": "Get in touch with IncubXperts. Find our Pune and Delaware office details, or send an enquiry to start your AI-native project today.",
+    "schemaType": "ContactPage",
+    "summary": "Contact IncubXperts to start an AI-native project."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "light",
+      "eyebrow": "Contact",
+      "title": "Speak to one of our experts",
+      "subtitle": "We will simply address your queries. No spam or extra outreach."
+    },
+    {
+      "type": "contact",
+      "eyebrow": "Got a question?",
+      "heading": "Tell us about your project",
+      "details": [
+        {
+          "label": "Business enquiries",
+          "value": "engage@incubxperts.com",
+          "href": "mailto:engage@incubxperts.com"
+        },
+        {
+          "label": "Phone",
+          "value": "+91 70283 34754",
+          "href": "tel:+917028334754"
+        },
+        {
+          "label": "Careers",
+          "value": "careers@incubxperts.com",
+          "href": "mailto:careers@incubxperts.com"
+        }
+      ]
+    },
+    {
+      "type": "locations",
+      "heading": "Our offices",
+      "items": [
+        {
+          "city": "Pune, India",
+          "detail": "IncubXperts TechnoConsulting Private Limited (HQ) — Office No 1, Level 5, Building B1, Symphony IT Park, Nanded City, Pune , Maharashtra, India 411068"
+        },
+        {
+          "city": "Delaware, USA",
+          "detail": "IncubXperts Inc. (Regd.) — Corporation Trust Center, 1209, Orange Street, Wilmington, New Castle, Delaware, USA 19801"
+        }
+      ]
+    }
+  ]
+}

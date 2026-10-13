@@ -1,0 +1,172 @@
+{
+  "reference": {
+    "name": "IncubXperts landing page",
+    "url": "https://incubxperts.com"
+  },
+  "path": "/",
+  "seo": {
+    "title": "IncubXperts | AI-Native Engineering & Software Partner",
+    "description": "IncubXperts is an AI-native engineering partner for product companies and enterprises, helping them design, build, and scale intelligent software.",
+    "summary": "AI-native engineering partner: AI adoption, agentic solutions, product engineering, cloud and data."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "dark",
+      "eyebrow": "AI-Native Engineering & Software Partner",
+      "title": "Redefine What’s Possible with AI",
+      "subtitle": "Strategic, value-focused AI adoption tailored for your business",
+      "ctas": [
+        {
+          "label": "See our work",
+          "href": "/work"
+        },
+        {
+          "label": "Talk to us",
+          "href": "/contact",
+          "style": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Who we are",
+      "heading": "Purpose-built AI for real impact",
+      "paragraphs": [
+        "Leaders in technology, partners in progress. IncubXperts is an AI-native engineering partner for product companies and enterprises, helping them design, build, and scale intelligent software.",
+        "Since 2017 we have helped product companies and enterprises adopt AI, modernise their cloud and data foundations, and ship intelligent software that works in the real world."
+      ],
+      "callout": {
+        "title": "A decade of building",
+        "body": "IncubXperts marked 10 years of building AI-native software and technology solutions."
+      }
+    },
+    {
+      "type": "stats",
+      "eyebrow": "IncubXperts at a glance",
+      "heading": "Proof, not promises",
+      "tone": "dark",
+      "items": [
+        {
+          "value": "150+",
+          "label": "Experts"
+        },
+        {
+          "value": "95%",
+          "label": "Client Retention Rate"
+        },
+        {
+          "value": "100%",
+          "label": "Debt Free Organization"
+        },
+        {
+          "value": "55%",
+          "label": "CAGR Since 2021"
+        }
+      ]
+    },
+    {
+      "type": "cardGrid",
+      "eyebrow": "Our services",
+      "heading": "Technology offerings that help you innovate, scale and thrive",
+      "columns": 3,
+      "items": [
+        {
+          "title": "AI Adoption & Strategy",
+          "body": "Adopt AI with clear, purpose-built strategies that create real business impact"
+        },
+        {
+          "title": "Agentic Solutions",
+          "body": "Build AI that thinks, collaborates, and delivers autonomously"
+        },
+        {
+          "title": "Workflow Automation",
+          "body": "Enable seamless, self-operating workflows with intelligent AI-driven automation"
+        },
+        {
+          "title": "AI-Augmented Product Engineering",
+          "body": "Build AI-ready products with augmented engineering and human-led precision"
+        },
+        {
+          "title": "AI-Augmented QA",
+          "body": "Maximize accuracy and speed with AI-assisted testing and smarter validation"
+        },
+        {
+          "title": "Predictive Analytics & BI",
+          "body": "Turn complex data into actionable intelligence"
+        },
+        {
+          "title": "MVP in 10 Days",
+          "body": "Turn ideas into working products, accelarated with AI"
+        },
+        {
+          "title": "Cloud & AI Infrastructure",
+          "body": "Power next-gen apps with cloud infrastructure built for intelligence, automation, and scale"
+        },
+        {
+          "title": "AI-First Architecture & Governance",
+          "body": "Build resilient, AI-ready foundations for security, scale, and governance"
+        },
+        {
+          "title": "Global Capacity Center (GCC)",
+          "body": "GCC expertise tailored for SMB and Mid-market expectation"
+        }
+      ]
+    },
+    {
+      "type": "caseStudies",
+      "eyebrow": "Case stories",
+      "heading": "See our work in action",
+      "limit": 3,
+      "viewAll": {
+        "label": "See all case stories",
+        "href": "/work",
+        "style": "secondary"
+      }
+    },
+    {
+      "type": "iconGrid",
+      "eyebrow": "Why IncubXperts",
+      "heading": "AI-native by design",
+      "columns": 3,
+      "bg": "dark",
+      "items": [
+        {
+          "icon": "brain",
+          "title": "AI Native by Design",
+          "body": "AI is not an add-on. It shapes how we architect, design, build, and test systems. With human in the loop oversight, we use AI where it improves outcomes and avoid it where it doesn’t, creating higher consistency and quality."
+        },
+        {
+          "icon": "rocket",
+          "title": "Faster Delivery with AI and HITL",
+          "body": "Prompt-led prototyping, intelligent automation, and AI-augmented workflows help us build faster while human in the loop validation ensures reliability and production readiness."
+        },
+        {
+          "icon": "trend",
+          "title": "ROI and TCO Led Engineering",
+          "body": "Every solution is shaped around measurable business value. We design with cost, governance, maintainability, and total cost of ownership in mind so AI scales responsibly and delivers long-term ROI."
+        }
+      ]
+    },
+    {
+      "type": "testimonials",
+      "eyebrow": "Testimonials",
+      "heading": "Success delivered, trust earned",
+      "variant": "carousel"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Let's build together",
+      "heading": "Ready to put AI to work in your business?",
+      "body": "Tell us about your challenge and our experts will show you how we would approach it.",
+      "primary": {
+        "label": "Speak with us",
+        "href": "/contact"
+      },
+      "secondary": {
+        "label": "See our work",
+        "href": "/work"
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "reference": {
+    "name": "Coditas — Careers",
+    "url": "https://coditas.com/careers"
+  },
+  "path": "/careers",
+  "seo": {
+    "title": "Careers — Join Our AI Engineering Team",
+    "description": "Explore open roles and growth programs like Leadership Nexus and Tech Circle. Build your career with an AI-native engineering team.",
+    "summary": "Open roles, growth programmes and culture at IncubXperts."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "split",
+      "pinned": true,
+      "title": "Grow with an AI-native team",
+      "accentWord": "AI-native",
+      "subtitle": "A culture of growth, a future of possibilities. Join engineers, designers and builders who ship intelligent software.",
+      "ctas": [
+        {
+          "label": "Explore openings",
+          "href": "#openings"
+        }
+      ]
+    },
+    {
+      "type": "collage",
+      "bg": "light",
+      "eyebrow": "Life at IncubXperts",
+      "heading": "A people-centred environment promoting growth and a healthy dose of fun",
+      "items": [
+        {
+          "caption": "Festivities and celebrations",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/festivities1.webp",
+            "alt": "IncubXperts team celebrating a festival"
+          }
+        },
+        {
+          "caption": "Get-togethers",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/getTogether1.webp",
+            "alt": "IncubXperts team get-together"
+          }
+        },
+        {
+          "caption": "Recognition and awards",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/recgnonization1.webp",
+            "alt": "IncubXperts recognition event"
+          }
+        },
+        {
+          "caption": "IX Premier League",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/ixpl1.webp",
+            "alt": "IncubXperts sports league"
+          }
+        }
+      ]
+    },
+    {
+      "type": "featureList",
+      "variant": "zigzag",
+      "bg": "dark",
+      "eyebrow": "Why join",
+      "heading": "Because you deserve more than just a job",
+      "items": [
+        {
+          "title": "AI culture you help build",
+          "body": "Org-wide AI Hackathons and an AI Bootcamp that scaled from 36 to 99 associates.",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/fista1.webp",
+            "alt": "IncubXperts team at a company event"
+          }
+        },
+        {
+          "title": "Learning that never stops",
+          "body": "Tech Circle, Tech Talks and certification reimbursement keep your skills current.",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/ixpl2.JPG",
+            "alt": "IncubXperts team learning together"
+          }
+        },
+        {
+          "title": "Mentorship that fast-tracks you",
+          "body": "Raw Diamonds and Leadership Nexus help emerging talent and leaders grow.",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/getTogether2.webp",
+            "alt": "IncubXperts team get-together"
+          }
+        },
+        {
+          "title": "Fair and open to all",
+          "body": "An Equal Opportunity Employer with a data-driven, objective performance review system.",
+          "image": {
+            "src": "https://incubxperts.com/images/Contactus/beyondimg1.jpg",
+            "alt": "IncubXperts team"
+          }
+        }
+      ]
+    },
+    {
+      "type": "iconGrid",
+      "bg": "surface",
+      "eyebrow": "Perks and benefits",
+      "heading": "Benefits of being an IX'ian",
+      "intro": "A thoughtful, evolving list of perks to support your life, growth and well-being.",
+      "columns": 3,
+      "items": [
+        {
+          "icon": "cash",
+          "title": "Competitive Pay Structure"
+        },
+        {
+          "icon": "heart",
+          "title": "Corporate Health Insurance"
+        },
+        {
+          "icon": "heart",
+          "title": "Opt-In Parental Health Cover"
+        },
+        {
+          "icon": "users",
+          "title": "Maternity & Paternity Leave"
+        },
+        {
+          "icon": "book",
+          "title": "Certification Reimbursement Policy"
+        },
+        {
+          "icon": "laptop",
+          "title": "Remote Work Policy"
+        },
+        {
+          "icon": "globe",
+          "title": "Flexibility at Work"
+        },
+        {
+          "icon": "globe",
+          "title": "Internet Expense Reimbursement"
+        },
+        {
+          "icon": "check",
+          "title": "Supportive Leave Policy"
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "layout": "rail",
+      "bg": "light",
+      "eyebrow": "Chart your path",
+      "heading": "Empowering your journey from day one.",
+      "tabs": [
+        {
+          "label": "Leadership Nexus",
+          "title": "Leadership Nexus",
+          "body": "Quarterly meetups designed to mentor, elevate and strengthen our leaders."
+        },
+        {
+          "label": "Tech Circle",
+          "title": "Tech Circle",
+          "body": "Facilitating growth through peer-led learning for technical experts."
+        },
+        {
+          "label": "Training & Development",
+          "title": "Training & Development",
+          "body": "Ongoing initiatives for holistic individual growth."
+        },
+        {
+          "label": "Raw Diamonds",
+          "title": "Raw Diamonds",
+          "body": "Mentorship program to unlock and fast-track emerging talent."
+        },
+        {
+          "label": "Performance Reviews",
+          "title": "Performance Reviews",
+          "body": "Data-driven, unbiased, objective assessments that provide insights on individual capability."
+        },
+        {
+          "label": "Tech Talks",
+          "title": "Tech Talks",
+          "body": "Mentorship sessions led by our tech architects and leads to bridge the knowledge gap."
+        }
+      ]
+    },
+    {
+      "type": "jobs",
+      "bg": "surface",
+      "eyebrow": "Career openings",
+      "heading": "Find your next role",
+      "intro": "The right career is more than a role. Discover opportunities that align with your goals and become part of our team.",
+      "applyLabel": "Apply now",
+      "footer": {
+        "text": "We are constantly looking for great talent.",
+        "cta": {
+          "label": "Browse all openings",
+          "href": "https://incubxperts.zohorecruit.com/jobs/Careers"
+        }
+      }
+    },
+    {
+      "type": "faq",
+      "singleOpen": true,
+      "bg": "light",
+      "heading": "Frequently asked questions",
+      "items": [
+        {
+          "q": "How do I apply for a role?",
+          "a": "Browse the open positions on this page and apply from the role's page, or write to careers@incubxperts.com with your CV."
+        },
+        {
+          "q": "Do you offer remote or flexible work?",
+          "a": "Yes. We have a remote work policy and flexibility at work, which can vary by role and team."
+        },
+        {
+          "q": "How do you support learning?",
+          "a": "Through Tech Circle, Tech Talks, Training & Development, the Raw Diamonds mentorship programme and a certification reimbursement policy."
+        },
+        {
+          "q": "Are you an equal opportunity employer?",
+          "a": "Yes. IncubXperts is an Equal Opportunity Employer."
+        }
+      ]
+    },
+    {
+      "type": "locations",
+      "bg": "surface",
+      "heading": "Our offices",
+      "items": [
+        {
+          "city": "Pune, India",
+          "detail": "Office No 1, Level 5, Building B1, Symphony IT Park, Nanded City, Pune , Maharashtra, India 411068"
+        },
+        {
+          "city": "Delaware, USA",
+          "detail": "Corporation Trust Center, 1209, Orange Street, Wilmington, New Castle, Delaware, USA 19801"
+        }
+      ]
+    }
+  ]
+}

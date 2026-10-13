@@ -1,0 +1,26 @@
+{
+  "path": "/privacy",
+  "seo": {
+    "title": "Privacy Policy",
+    "description": "How IncubXperts collects, uses and protects personal information submitted through this website."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "light",
+      "eyebrow": "Legal",
+      "title": "Privacy policy",
+      "subtitle": "DRAFT — to be reviewed by your legal team before launch."
+    },
+    {
+      "type": "richText",
+      "heading": "Your information",
+      "paragraphs": [
+        "This website is operated by IncubXperts TechnoConsulting Private Limited. We collect only the information you choose to give us, for example through our contact form (name, email, organisation and message).",
+        "We use this information to respond to your enquiry and to manage our business relationship with you. We do not sell your personal information.",
+        "You can ask us to access, correct or delete your information at any time by writing to engage@incubxperts.com.",
+        "We may use privacy-friendly analytics to understand how the site is used. If cookies are added in future, this policy and a consent banner will be updated accordingly."
+      ]
+    }
+  ]
+}
