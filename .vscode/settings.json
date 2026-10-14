@@ -1,0 +1,5 @@
+{
+  "json.schemas": [
+    { "fileMatch": ["/src/content/pages/*.json"], "url": "./src/content/page.schema.json" }
+  ]
+}

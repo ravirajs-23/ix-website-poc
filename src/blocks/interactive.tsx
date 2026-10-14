@@ -153,7 +153,7 @@ export function TestimonialsSpotlight({ items }: { items: Testimonial[] }) {
               className={`w-full rounded-lg border px-4 py-3 text-left text-sm ${n === i ? "border-brand bg-brand text-white" : "border-white/20 text-slate-200 hover:border-white/50"}`}
             >
               <span className="block font-semibold">{t.name}</span>
-              <span className="block max-w-48 truncate opacity-90 lg:max-w-none">{t.title}</span>
+              <span className="block max-w-48 truncate lg:max-w-none">{t.title}</span>
             </button>
           </li>
         ))}
