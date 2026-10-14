@@ -1,0 +1,146 @@
+{
+  "reference": {
+    "name": "HatchWorks — Our Work",
+    "url": "https://hatchworks.com/case-studies/"
+  },
+  "path": "/work",
+  "seo": {
+    "title": "Our Work — AI & Software Case Studies",
+    "description": "Browse IncubXperts case studies by service and industry: AI adoption, agentic solutions, product engineering, cloud and data modernisation.",
+    "schemaType": "CollectionPage",
+    "summary": "Case studies of AI-native engineering work, filterable by service and industry."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "dark",
+      "eyebrow": "Our work",
+      "title": "Outcomes we have delivered",
+      "accentWord": "delivered",
+      "watermark": "Outcomes",
+      "subtitle": "Every story here is a real engagement — the problem, the solution and what changed.",
+      "badge": {
+        "value": "95%",
+        "label": "client retention rate"
+      },
+      "ctas": [
+        {
+          "label": "Explore the work",
+          "href": "#case-studies",
+          "arrow": "down"
+        },
+        {
+          "label": "Start a project",
+          "href": "/contact",
+          "style": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "caseStudies",
+      "anchor": "case-studies",
+      "eyebrow": "Case studies",
+      "heading": "Every engagement, measured",
+      "intro": "Pick a tag to filter the catalogue.",
+      "filterable": true
+    },
+    {
+      "type": "stats",
+      "bg": "surface",
+      "layout": "split",
+      "eyebrow": "IncubXperts at a glance",
+      "heading": "A proven partner for AI-native engineering",
+      "intro": "IncubXperts is an AI-native engineering partner for product companies and enterprises, helping them design, build, and scale intelligent software.",
+      "items": [
+        {
+          "value": "150+",
+          "label": "Experts",
+          "note": "Welcomed our 150th IX'ian in 2025"
+        },
+        {
+          "value": "95%",
+          "label": "Client Retention Rate"
+        },
+        {
+          "value": "100%",
+          "label": "Debt Free Organization"
+        },
+        {
+          "value": "55%",
+          "label": "CAGR Since 2021"
+        },
+        {
+          "value": "2017",
+          "label": "Year founded",
+          "note": "Headquartered in Pune, India"
+        },
+        {
+          "value": "10 years",
+          "label": "Building AI-native software",
+          "note": "A decade of intelligent software"
+        }
+      ]
+    },
+    {
+      "type": "badges",
+      "variant": "marquee",
+      "bg": "light",
+      "eyebrow": "Recognition and partnerships",
+      "heading": "Certified and connected",
+      "items": [
+        {
+          "name": "Registered Anthropic partner"
+        },
+        {
+          "name": "Certifications in AWS, Azure, UX, Dynamics 365, and Power Apps"
+        },
+        {
+          "name": "NASSCOM member"
+        },
+        {
+          "name": "Equal Opportunity Employer"
+        },
+        {
+          "name": "Ploko",
+          "label": "Partner"
+        },
+        {
+          "name": "Sustainity",
+          "label": "Partner"
+        },
+        {
+          "name": "Anthropic",
+          "label": "Partner"
+        }
+      ]
+    },
+    {
+      "type": "testimonials",
+      "variant": "spotlight",
+      "eyebrow": "What our clients say",
+      "heading": "Trusted by teams that ship"
+    },
+    {
+      "type": "testimonials",
+      "variant": "grid",
+      "initial": 6,
+      "bg": "light",
+      "eyebrow": "Reviews",
+      "heading": "What teams say about working with us"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Let's build together",
+      "heading": "Want results like these?",
+      "body": "Tell us about your challenge. Our team will show you how we would approach it.",
+      "primary": {
+        "label": "Speak with us",
+        "href": "/contact"
+      },
+      "secondary": {
+        "label": "See our work",
+        "href": "/work"
+      }
+    }
+  ]
+}

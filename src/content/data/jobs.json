@@ -1,0 +1,43 @@
+[
+  {
+    "slug": "senior-software-engineer-sample",
+    "title": "Senior Software Engineer (SAMPLE — replace in Strapi)",
+    "department": "Engineering",
+    "location": "Pune, India",
+    "employmentType": "FULL_TIME",
+    "experience": "5+ years",
+    "summary": "Placeholder role used to demonstrate the careers layout and JobPosting structured data. Replace with real openings managed in Strapi.",
+    "responsibilities": [
+      "Design and build scalable, AI-augmented software.",
+      "Collaborate with product and design teams.",
+      "Mentor engineers and review code."
+    ],
+    "requirements": [
+      "5+ years of professional software engineering experience.",
+      "Strong grounding in modern web and cloud technologies."
+    ],
+    "featured": true,
+    "postedAt": "2026-10-01",
+    "validThrough": "2027-03-31"
+  },
+  {
+    "slug": "qa-automation-engineer-sample",
+    "title": "QA Automation Engineer (SAMPLE — replace in Strapi)",
+    "department": "Quality Engineering",
+    "location": "Pune, India",
+    "employmentType": "FULL_TIME",
+    "experience": "3+ years",
+    "summary": "Placeholder role used to demonstrate the careers layout. Replace with real openings managed in Strapi.",
+    "responsibilities": [
+      "Build and maintain automated test suites.",
+      "Use AI-assisted tooling to improve coverage and speed."
+    ],
+    "requirements": [
+      "3+ years in QA automation.",
+      "Experience with Selenium or Playwright."
+    ],
+    "featured": true,
+    "postedAt": "2026-10-01",
+    "validThrough": "2027-03-31"
+  }
+]
