@@ -10,6 +10,21 @@ npm run dev                  # http://localhost:3000
 npm run build && npm start   # production check
 ```
 
+## Adding a page (repeatable workflow)
+**With Claude Code:** run `/new-page <reference-url> <slug> [title] [content source]`. The skill (`.claude/skills/new-page`)
+analyses the reference page's layout, maps each section to our blocks, builds the page from real IncubXperts content,
+validates it, builds it, checks it against Lighthouse and commits it on a branch.
+
+**By hand:**
+```bash
+npm run new:page -- services "Services" --reference https://example.com/services --ref-name "Example — Services" --nav "Services"
+# edit src/content/pages/services.json (replace every TODO)
+npm run validate:pages   # strict schema + one hero + links/anchors + image hosts + placeholder text
+npm run build
+```
+`src/blocks/schema.ts` is the single source of truth for page/block shapes; `npm run schema:export` writes
+`src/content/page.schema.json` (editor autocompletion for page JSON, and a contract for agents).
+
 ## How pages work
 - `src/content/pages/<slug>.json` = one page (`home.json` is `/`). A page is `{ path, seo, blocks[] }`.
 - Dropping a new JSON file there creates a new statically generated route (`src/app/[slug]/page.tsx`).
