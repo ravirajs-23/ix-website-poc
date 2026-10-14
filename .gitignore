@@ -42,3 +42,6 @@ next-env.d.ts
 
 # keep the documented env template
 !.env.example
+
+# crash dumps
+*.stackdump
