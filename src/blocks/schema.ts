@@ -64,6 +64,8 @@ export const heroSchema = z.strictObject({
   watermark: z.string().optional(),
   /** Hero stays fixed while the rest of the page scrolls over it (md+ screens only). */
   pinned: z.boolean().optional(),
+  /** xl: taller hero with an oversized headline and large buttons (dark variant). */
+  size: z.enum(["md", "xl"]).optional(),
   subtitle: z.string().optional(),
   ctas: z.array(ctaSchema).optional(),
   badge: z.strictObject({ value: z.string(), label: z.string() }).optional(),
@@ -132,6 +134,12 @@ export const caseStudiesSchema = z.strictObject({
   type: z.literal("caseStudies"),
   ...headingShape,
   filterable: z.boolean().optional(),
+  /** center: centred heading, toggle and chips. */
+  align: z.enum(["left", "center"]).optional(),
+  /** lg: larger toggle and chips, with an icon on each chip. */
+  size: z.enum(["md", "lg"]).optional(),
+  /** Small helper line shown under the filter chips. */
+  hint: z.string().optional(),
   limit: z.number().int().positive().optional(),
   viewAll: ctaSchema.optional(),
 });

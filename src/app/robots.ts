@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/site";
+import { NOINDEX, absoluteUrl } from "@/lib/site";
 
 // AI crawlers are explicitly allowed so the site can be indexed and cited by AI search and assistants.
 const aiCrawlers = [
@@ -9,6 +9,8 @@ const aiCrawlers = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
+  // Demo/staging: block everything (see NOINDEX in lib/site.ts).
+  if (NOINDEX) return { rules: { userAgent: "*", disallow: "/" } };
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: ["/api/"] },

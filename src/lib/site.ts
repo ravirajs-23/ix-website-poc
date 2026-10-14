@@ -1,6 +1,13 @@
 // Central site configuration. Replace SITE_URL via env when the production domain is decided.
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
+/**
+ * Set NEXT_PUBLIC_NOINDEX=true on demo/staging deployments: every page gets a noindex meta tag and
+ * robots.txt disallows all crawlers, so the demo link stays out of search results and AI indexes.
+ * Leave it unset for the real launch.
+ */
+export const NOINDEX = process.env.NEXT_PUBLIC_NOINDEX === "true";
+
 export const site = {
   name: "IncubXperts",
   legalName: "IncubXperts TechnoConsulting Private Limited",

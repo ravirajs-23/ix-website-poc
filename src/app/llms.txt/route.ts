@@ -20,7 +20,7 @@ export async function GET() {
     ...cases.map((c) => `- [${c.title}](${absoluteUrl(`/work/${c.slug}`)}): ${c.summary}`),
     "",
     "## Open roles",
-    ...jobs.map((j) => `- [${j.title}](${absoluteUrl(`/careers/${j.slug}`)}): ${j.location}, ${j.experience}`),
+    ...jobs.filter((j) => !j.example).map((j) => `- [${j.title}](${absoluteUrl(`/careers/${j.slug}`)}): ${j.location}, ${j.experience}`),
     "",
     "## Contact",
     `- Email: ${site.email}`,

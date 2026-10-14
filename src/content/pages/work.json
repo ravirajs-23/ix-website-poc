@@ -18,6 +18,7 @@
       "title": "Outcomes we have delivered",
       "accentWord": "delivered",
       "watermark": "Outcomes",
+      "size": "xl",
       "subtitle": "Every story here is a real engagement — the problem, the solution and what changed.",
       "badge": {
         "value": "95%",
@@ -41,7 +42,9 @@
       "anchor": "case-studies",
       "eyebrow": "Case studies",
       "heading": "Every engagement, measured",
-      "intro": "Pick a tag to filter the catalogue.",
+      "align": "center",
+      "size": "lg",
+      "hint": "Pick a tag to filter the catalogue.",
       "filterable": true
     },
     {

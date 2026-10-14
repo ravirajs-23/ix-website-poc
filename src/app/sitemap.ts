@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly" as const,
       priority: 0.6,
     })),
-    ...jobs.map((j) => ({
+    ...jobs.filter((j) => !j.example).map((j) => ({
       url: absoluteUrl(`/careers/${j.slug}`),
       lastModified: new Date(j.postedAt),
       changeFrequency: "weekly" as const,

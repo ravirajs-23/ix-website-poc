@@ -29,9 +29,17 @@ export function Header() {
             Contact us
           </Link>
         </nav>
+        <div className="flex items-center gap-1 md:hidden">
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="rounded-full bg-brand px-4 py-1.5 text-sm font-semibold hover:bg-brand-deep"
+          >
+            Contact
+          </Link>
         <button
           type="button"
-          className="rounded p-2 md:hidden"
+          className="rounded p-2"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -41,6 +49,7 @@ export function Header() {
             <path d={open ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
           </svg>
         </button>
+        </div>
       </Container>
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="border-t border-white/10 md:hidden">

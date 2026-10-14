@@ -67,7 +67,7 @@ async function CaseStudies({ block }: { block: CaseStudiesBlock }) {
   return (
     <Section tone={block.bg ?? "light"} labelledBy={block.heading ? id : undefined}>
       <SectionHeading {...block} tone="light" id={id} />
-      <CaseStudyGrid items={items} filterable={!!block.filterable} />
+      <CaseStudyGrid items={items} filterable={!!block.filterable} align={block.align} size={block.size} hint={block.hint} />
       {block.viewAll && (
         <div className="mt-10 text-center">
           <Button cta={{ ...block.viewAll, style: "secondary" }} />
@@ -91,7 +91,11 @@ async function Jobs({ block }: { block: JobsBlock }) {
           {items.map((j) => (
             <li key={j.slug}>
               <article className="relative flex h-full flex-col rounded-card border border-line bg-white p-7 text-ink transition-shadow hover:shadow-xl">
-                {j.featured && <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-link">Featured opening</p>}
+                {j.example ? (
+                  <p className="mb-3"><span className="rounded-full bg-amber-200 px-3 py-1 text-xs font-bold text-amber-950">Example role</span></p>
+                ) : (
+                  j.featured && <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-link">Featured opening</p>
+                )}
                 <h3 className="text-2xl font-semibold">
                   <Link href={`/careers/${j.slug}`} className="after:absolute after:inset-0 hover:text-link">
                     {j.title}

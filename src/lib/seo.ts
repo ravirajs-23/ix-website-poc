@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl, site } from "./site";
+import { NOINDEX, absoluteUrl, site } from "./site";
 
 export function buildMetadata({
   title,
@@ -19,7 +19,7 @@ export function buildMetadata({
     title,
     description,
     alternates: { canonical: url },
-    robots: noindex ? { index: false, follow: false } : { index: true, follow: true },
+    robots: noindex || NOINDEX ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: { title, description, url, siteName: site.name, type, locale: "en_US" },
     twitter: { card: "summary_large_image", title, description },
   };

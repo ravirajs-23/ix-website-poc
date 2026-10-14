@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/ui";
 import { organizationLd, websiteLd } from "@/lib/seo";
-import { SITE_URL, site } from "@/lib/site";
+import { NOINDEX, SITE_URL, site } from "@/lib/site";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const barlow = Barlow_Semi_Condensed({
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: site.name,
   alternates: { canonical: "/" },
+  ...(NOINDEX ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {

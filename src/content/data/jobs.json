@@ -1,12 +1,12 @@
 [
   {
     "slug": "senior-software-engineer-sample",
-    "title": "Senior Software Engineer (SAMPLE — replace in Strapi)",
+    "title": "Senior Software Engineer",
     "department": "Engineering",
     "location": "Pune, India",
     "employmentType": "FULL_TIME",
     "experience": "5+ years",
-    "summary": "Placeholder role used to demonstrate the careers layout and JobPosting structured data. Replace with real openings managed in Strapi.",
+    "summary": "Example listing that demonstrates how an opening appears. Real openings are managed in Strapi.",
     "responsibilities": [
       "Design and build scalable, AI-augmented software.",
       "Collaborate with product and design teams.",
@@ -17,17 +17,18 @@
       "Strong grounding in modern web and cloud technologies."
     ],
     "featured": true,
+    "example": true,
     "postedAt": "2026-10-01",
     "validThrough": "2027-03-31"
   },
   {
     "slug": "qa-automation-engineer-sample",
-    "title": "QA Automation Engineer (SAMPLE — replace in Strapi)",
+    "title": "QA Automation Engineer",
     "department": "Quality Engineering",
     "location": "Pune, India",
     "employmentType": "FULL_TIME",
     "experience": "3+ years",
-    "summary": "Placeholder role used to demonstrate the careers layout. Replace with real openings managed in Strapi.",
+    "summary": "Example listing that demonstrates how an opening appears. Real openings are managed in Strapi.",
     "responsibilities": [
       "Build and maintain automated test suites.",
       "Use AI-assisted tooling to improve coverage and speed."
@@ -37,6 +38,7 @@
       "Experience with Selenium or Playwright."
     ],
     "featured": true,
+    "example": true,
     "postedAt": "2026-10-01",
     "validThrough": "2027-03-31"
   }

@@ -87,20 +87,22 @@ export function Hero({ block, crumbs }: { block: HeroBlock; crumbs?: { name: str
           {block.watermark}
         </span>
       )}
-      <Container className="relative w-full py-20 text-center sm:py-32">
+      <Container className={`relative w-full text-center ${block.size === "xl" ? "py-28 sm:py-44" : "py-20 sm:py-32"}`}>
         {block.eyebrow && (
           <p className="mx-auto mb-6 inline-block rounded-full border border-white/20 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
             {block.eyebrow}
           </p>
         )}
-        <h1 className="mx-auto max-w-5xl text-5xl font-semibold leading-[1.02] sm:text-7xl">
+        <h1
+          className={`mx-auto max-w-6xl ${block.size === "xl" ? "text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.92] tracking-tight" : "text-5xl font-semibold leading-[1.02] sm:text-7xl"}`}
+        >
           <AccentTitle title={block.title} accent={block.accentWord} />
         </h1>
         {block.subtitle && (
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">{block.subtitle}</p>
+          <p className={`mx-auto mt-6 max-w-2xl leading-relaxed text-slate-300 ${block.size === "xl" ? "text-xl sm:text-2xl" : "text-lg"}`}>{block.subtitle}</p>
         )}
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          {block.ctas?.map((c) => <Button key={c.href + c.label} cta={c} onDark />)}
+          {block.ctas?.map((c) => <Button key={c.href + c.label} cta={c} onDark className={block.size === "xl" ? "px-8 py-4 text-base" : ""} />)}
           {block.badge && (
             <p className="rounded-full border border-white/20 px-5 py-3 text-sm">
               <strong className="text-white">{block.badge.value}</strong>{" "}
