@@ -102,6 +102,29 @@
       ]
     },
     {
+      "type": "richText",
+      "bg": "light",
+      "heading": "How we work",
+      "lead": "Understand the why. Own the outcome.",
+      "paragraphs": [
+        "We work in lean, self-sustaining teams that take ownership of the result, whether acting independently or as an extension of a customer's own team.",
+        "Every engagement starts with the business intent, so each person knows the 'why' behind what they are building and applies themselves beyond mere execution.",
+        "Regular communication programmes, technical audits and human-in-the-loop AI practices keep our work, and our people, growing."
+      ],
+      "cta": {
+        "label": "See how we deliver",
+        "href": "/about#how-we-deliver"
+      },
+      "media": {
+        "side": "right",
+        "frame": true,
+        "image": {
+          "src": "https://incubxperts.com/images/Contactus/office3.webp",
+          "alt": "IncubXperts engineers working together at their laptops in the office"
+        }
+      }
+    },
+    {
       "type": "iconGrid",
       "bg": "surface",
       "eyebrow": "Perks and benefits",

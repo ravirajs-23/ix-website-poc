@@ -375,6 +375,7 @@ export function RichText({ block }: { block: RichTextBlock }) {
   const text = (
     <div className={centered ? "mx-auto max-w-3xl text-center" : ""}>
       <SectionHeading eyebrow={block.eyebrow} heading={block.heading} id={id} align={centered ? "center" : "left"} />
+      {block.lead && <p className={`-mt-6 mb-5 max-w-3xl text-xl font-semibold text-ink sm:-mt-9 ${centered ? "mx-auto" : ""}`}>{block.lead}</p>}
       <div className={`max-w-3xl space-y-5 text-lg leading-relaxed text-muted ${centered ? "mx-auto" : ""}`}>
         {block.paragraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
       </div>
@@ -398,8 +399,17 @@ export function RichText({ block }: { block: RichTextBlock }) {
       <Section tone={block.bg ?? "light"} labelledBy={block.heading ? id : undefined}>
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className={left ? "lg:order-2" : ""}>{text}</div>
-          <div className={`relative aspect-[4/3] overflow-hidden rounded-card bg-gradient-to-br from-brand to-navy ${left ? "lg:order-1" : ""}`}>
-            <Image src={block.media.image.src} alt={block.media.image.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+          <div className={`relative ${block.media.frame ? (left ? "pl-4 pb-4 sm:pl-6 sm:pb-6" : "pr-4 pb-4 sm:pr-6 sm:pb-6") : ""} ${left ? "lg:order-1" : ""}`}>
+            {block.media.frame && (
+              // Decorative offset block behind the photo, in the brand colour.
+              <span
+                aria-hidden="true"
+                className={`absolute bottom-0 h-[calc(100%-1rem)] w-[calc(100%-1rem)] rounded-card bg-brand sm:h-[calc(100%-1.5rem)] sm:w-[calc(100%-1.5rem)] ${left ? "left-0" : "right-0"}`}
+              />
+            )}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-gradient-to-br from-brand to-navy">
+              <Image src={block.media.image.src} alt={block.media.image.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+            </div>
           </div>
         </div>
       </Section>

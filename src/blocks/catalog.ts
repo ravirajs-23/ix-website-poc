@@ -18,7 +18,7 @@ export const blockCatalog: Record<Block["type"], string> = {
   faq: "Accordion of questions and answers. singleOpen keeps one answer open at a time. Also emits FAQPage structured data.",
   badges: "Text badges for awards, recognitions, certifications, technology partners. variant marquee = auto-scrolling strip (pauses on hover, static for reduced motion).",
   process: "Numbered steps describing how work gets done (delivery process, interview process).",
-  richText: "Long-form paragraphs with optional callout box. media adds a side image; align center for centred statements; cta adds a button. Use for origin story, policies.",
+  richText: "Long-form paragraphs with optional callout box. lead adds a bold one-line summary under the heading; media adds a side image (media.frame adds an offset brand-colour block behind it); align center for centred statements; cta adds a button. Use for origin story, policies, split text + photo sections like How we work.",
   cta: "Closing call-to-action band with primary/secondary buttons.",
   collage: "Staggered image/caption tiles for culture and life-at-company storytelling.",
   locations: "List of offices with city and detail.",

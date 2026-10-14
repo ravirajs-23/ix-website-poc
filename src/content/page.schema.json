@@ -1177,6 +1177,9 @@
                   "dark"
                 ]
               },
+              "lead": {
+                "type": "string"
+              },
               "paragraphs": {
                 "minItems": 1,
                 "type": "array",
@@ -1227,6 +1230,9 @@
                       "left",
                       "right"
                     ]
+                  },
+                  "frame": {
+                    "type": "boolean"
                   }
                 },
                 "required": [

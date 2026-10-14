@@ -192,10 +192,14 @@ export const processSchema = z.strictObject({
 export const richTextSchema = z.strictObject({
   type: z.literal("richText"),
   ...headingShape,
+  /** Short bold line directly under the heading (e.g. a one-sentence summary of the section). */
+  lead: z.string().optional(),
   paragraphs: z.array(z.string()).min(1),
   callout: z.strictObject({ title: z.string(), body: z.string() }).optional(),
-  /** Image beside the text. */
-  media: z.strictObject({ image: imageSchema, side: z.enum(["left", "right"]).optional() }).optional(),
+  /** Image beside the text. `frame` adds an offset brand-colour block behind the image. */
+  media: z
+    .strictObject({ image: imageSchema, side: z.enum(["left", "right"]).optional(), frame: z.boolean().optional() })
+    .optional(),
   align: z.enum(["left", "center"]).optional(),
   cta: ctaSchema.optional(),
 });
