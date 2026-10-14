@@ -124,6 +124,7 @@
     },
     {
       "type": "tabs",
+      "anchor": "how-we-deliver",
       "layout": "rail",
       "bg": "surface",
       "eyebrow": "How we deliver",
