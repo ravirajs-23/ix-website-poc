@@ -130,10 +130,11 @@ export function Stats({ block }: { block: StatsBlock }) {
       )}
       <dl className={`grid gap-px overflow-hidden rounded-card sm:grid-cols-2 lg:grid-cols-3 ${dark ? "bg-white/10" : "bg-line"}`}>
         {block.items.map((s) => (
-          <div key={s.label} className={`reveal flex flex-col-reverse justify-end p-8 ${dark ? "bg-navy-2" : "bg-white"}`}>
-            {s.note && <p className={`mt-1 text-sm ${dark ? "text-slate-400" : "text-muted"}`}>{s.note}</p>}
-            <dt className="mt-2 text-base font-medium">{s.label}</dt>
-            <dd className="font-display text-5xl font-semibold text-brand sm:text-6xl">{s.value}</dd>
+          <div key={s.label} className={`reveal flex flex-col p-8 ${dark ? "bg-navy-2" : "bg-white"}`}>
+            {/* DOM order is dt then dd (valid <dl>); CSS order shows the number first. */}
+            <dt className="order-2 mt-2 text-base font-medium">{s.label}</dt>
+            <dd className="order-1 font-display text-5xl font-semibold text-brand sm:text-6xl">{s.value}</dd>
+            {s.note && <dd className={`order-3 mt-1 text-sm ${dark ? "text-slate-400" : "text-muted"}`}>{s.note}</dd>}
           </div>
         ))}
       </dl>
