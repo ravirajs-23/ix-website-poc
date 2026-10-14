@@ -45,3 +45,6 @@ next-env.d.ts
 
 # crash dumps
 *.stackdump
+
+# page-factory run artifacts (captures, screenshots, generated drafts)
+/.factory/

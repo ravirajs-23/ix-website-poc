@@ -10,10 +10,13 @@
     "validate:pages": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-pages.mts",
     "new:page": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/new-page.mts",
     "prebuild": "npm run validate:pages",
-    "schema:export": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-schema.mts"
+    "schema:export": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-schema.mts",
+    "factory": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/factory/index.mts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
     "next": "16.4.0",
+    "playwright-core": "^1.64.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "zod": "^4.6.7"
