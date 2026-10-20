@@ -22,7 +22,14 @@ function flatten<T>(item: StrapiItem): T {
   return base as T;
 }
 
-async function fromStrapi<T>(collection: string): Promise<T[] | null> {
+const filled = (v: unknown) => typeof v === "string" && v.length > 0;
+// A Strapi collection is only used if EVERY item has the fields this site needs. A Strapi with a different
+// content model (or a wrong collection) must fall back to the local JSON, never break the build.
+const isCaseStudy = (c: Partial<CaseStudy>) => filled(c.slug) && filled(c.title) && filled(c.summary) && (filled(c.publishedOn) || filled(c.publishedAt));
+const isJob = (j: Partial<Job>) => filled(j.slug) && filled(j.title) && filled(j.summary) && filled(j.postedAt);
+const isTestimonial = (t: Partial<Testimonial>) => filled(t.name) && filled(t.quote);
+
+async function fromStrapi<T>(collection: string, valid: (item: T) => boolean): Promise<T[] | null> {
   if (!STRAPI_URL) return null;
   try {
     const res = await fetch(
@@ -35,7 +42,8 @@ async function fromStrapi<T>(collection: string): Promise<T[] | null> {
     if (!res.ok) return null;
     const json = (await res.json()) as { data?: StrapiItem[] };
     if (!Array.isArray(json.data)) return null;
-    return json.data.map((i) => flatten<T>(i));
+    const items = json.data.map((i) => flatten<T>(i));
+    return items.every(valid) ? items : null;
   } catch {
     return null;
   }
@@ -48,15 +56,15 @@ async function fromFile<T>(name: string): Promise<T[]> {
   return JSON.parse(await fs.readFile(file, "utf8")) as T[];
 }
 
-async function load<T>(collection: string, fallbackFile: string): Promise<T[]> {
-  return (await fromStrapi<T>(collection)) ?? (await fromFile<T>(fallbackFile));
+async function load<T>(collection: string, fallbackFile: string, valid: (item: T) => boolean): Promise<T[]> {
+  return (await fromStrapi<T>(collection, valid)) ?? (await fromFile<T>(fallbackFile));
 }
 
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   "use cache";
   cacheLife("hours");
   cacheTag("strapi", "case-studies");
-  const items = (await load<CaseStudy>("case-studies", "case-studies")).map((c) => ({
+  const items = (await load<CaseStudy>("case-studies", "case-studies", isCaseStudy)).map((c) => ({
     ...c,
     // Strapi stores the editor-set date as publishedOn (publishedAt is Strapi's own publish timestamp).
     publishedAt: c.publishedOn ?? c.publishedAt,
@@ -72,7 +80,7 @@ export async function getJobs(): Promise<Job[]> {
   "use cache";
   cacheLife("hours");
   cacheTag("strapi", "jobs");
-  const items = await load<Job>("jobs", "jobs");
+  const items = await load<Job>("jobs", "jobs", isJob);
   return items.sort((a, b) => b.postedAt.localeCompare(a.postedAt));
 }
 
@@ -84,5 +92,5 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   "use cache";
   cacheLife("hours");
   cacheTag("strapi", "testimonials");
-  return load<Testimonial>("testimonials", "testimonials");
+  return load<Testimonial>("testimonials", "testimonials", isTestimonial);
 }

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useId, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/icons";
+import type { IconName } from "@/blocks/types";
 import type { CaseStudy, Testimonial } from "@/lib/types";
 
 /* ---------------- Testimonials ---------------- */
@@ -166,7 +167,45 @@ export function TestimonialsSpotlight({ items }: { items: Testimonial[] }) {
 
 const PAGE_SIZE = 12;
 
-export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filterable: boolean }) {
+const chipIcons: Record<string, IconName> = {
+  "AI Adoption & Strategy": "brain",
+  "Agentic Solutions": "sparkles",
+  "Workflow Automation": "trend",
+  "AI-Augmented Product Engineering": "code",
+  "AI-Augmented QA": "check",
+  "Predictive Analytics & BI": "data",
+  "MVP in 10 Days": "rocket",
+  "Cloud & AI Infrastructure": "cloud",
+  "AI-First Architecture & Governance": "shield",
+  "Global Capacity Center (GCC)": "globe",
+  "AI Augmented UX": "heart",
+  "Design Thinking": "bulb",
+  Healthcare: "heart",
+  Fintech: "cash",
+  "Social Networking": "users",
+  "Public Safety": "shield",
+  Legal: "book",
+  Hospitality: "headset",
+  "Environment & Sustainability": "globe",
+  Manufacturing: "laptop",
+};
+const chipIcon = (name: string): IconName => chipIcons[name] ?? "sparkles";
+
+export function CaseStudyGrid({
+  items,
+  filterable,
+  align = "left",
+  size = "md",
+  hint,
+}: {
+  items: CaseStudy[];
+  filterable: boolean;
+  align?: "left" | "center";
+  size?: "md" | "lg";
+  hint?: string;
+}) {
+  const center = align === "center";
+  const lg = size === "lg";
   const [by, setBy] = useState<"services" | "industries">("services");
   const [active, setActive] = useState<string | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
@@ -186,9 +225,9 @@ export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filte
   return (
     <div>
       {filterable && (
-        <div className="mb-10">
-          <div className="mb-5 flex flex-wrap items-center gap-3">
-            <div role="group" aria-label="Filter by" className="inline-flex rounded-full border border-line p-1">
+        <div className={`mb-10 ${center ? "text-center" : ""}`}>
+          <div className={`flex flex-wrap items-center gap-3 ${lg ? "mb-7" : "mb-5"} ${center ? "justify-center" : ""}`}>
+            <div role="group" aria-label="Filter by" className={`inline-flex rounded-full border border-line ${lg ? "p-1.5" : "p-1"}`}>
               {(["services", "industries"] as const).map((k) => (
                 <button
                   key={k}
@@ -198,9 +237,9 @@ export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filte
                     setBy(k);
                     reset();
                   }}
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold ${by === k ? "bg-ink text-white" : "text-muted hover:text-ink"}`}
+                  className={`inline-flex items-center gap-2 rounded-full font-semibold ${lg ? "px-7 py-3 text-base" : "px-5 py-2 text-sm"} ${by === k ? "bg-ink text-white" : "text-muted hover:text-ink"}`}
                 >
-                  <Icon name={k === "services" ? "code" : "globe"} className="h-4 w-4" />
+                  <Icon name={k === "services" ? "code" : "globe"} className={lg ? "h-5 w-5" : "h-4 w-4"} />
                   By {k === "services" ? "service" : "industry"}
                 </button>
               ))}
@@ -211,13 +250,13 @@ export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filte
               </button>
             )}
           </div>
-          <ul className="flex flex-wrap gap-2">
+          <ul className={`flex flex-wrap ${lg ? "gap-3" : "gap-2"} ${center ? "justify-center" : ""}`}>
             <li>
               <button
                 type="button"
                 aria-pressed={active === null}
                 onClick={reset}
-                className={`rounded-full border px-4 py-2 text-sm ${active === null ? "border-brand bg-brand text-white" : "border-line hover:border-brand"}`}
+                className={`inline-flex items-center gap-2 rounded-full border ${lg ? "px-5 py-3 text-base font-semibold" : "px-4 py-2 text-sm"} ${active === null ? "border-brand bg-brand text-white" : "border-line hover:border-brand"}`}
               >
                 All <span className="font-normal">{items.length}</span>
               </button>
@@ -231,13 +270,15 @@ export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filte
                     setActive(t);
                     setVisible(PAGE_SIZE);
                   }}
-                  className={`rounded-full border px-4 py-2 text-sm ${active === t ? "border-brand bg-brand text-white" : "border-line hover:border-brand"}`}
+                  className={`inline-flex items-center gap-2 rounded-full border ${lg ? "px-5 py-3 text-base font-semibold" : "px-4 py-2 text-sm"} ${active === t ? "border-brand bg-brand text-white" : "border-line hover:border-brand"}`}
                 >
+                  {lg && <Icon name={chipIcon(t)} className="h-5 w-5" />}
                   {t} <span className="font-normal">{n}</span>
                 </button>
               </li>
             ))}
           </ul>
+          {hint && <p className="mt-6 text-sm text-muted">{hint}</p>}
           <p className="sr-only" aria-live="polite">
             Showing {shown.length} case studies
           </p>
@@ -247,7 +288,7 @@ export function CaseStudyGrid({ items, filterable }: { items: CaseStudy[]; filte
         {shown.slice(0, visible).map((c) => (
           <li key={c.slug}>
             <article className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-white text-ink transition-shadow hover:shadow-xl">
-              <div aria-hidden="true" className="relative h-44 bg-gradient-to-br from-brand via-brand-deep to-navy">
+              <div aria-hidden="true" className="relative aspect-video bg-gradient-to-br from-brand via-brand-deep to-navy">
                 {c.image && (
                   <Image src={c.image} alt="" fill sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw" className="object-cover" />
                 )}

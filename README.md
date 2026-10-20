@@ -10,6 +10,10 @@ npm run dev                  # http://localhost:3000
 npm run build && npm start   # production check
 ```
 
+## Page factory: new page or new section from a reference URL
+`npm run factory -- page|section ...` turns a reference URL (layout) plus your content (live site, Strapi or text) into a validated page
+or section on our theme. See [docs/PAGE-FACTORY.md](docs/PAGE-FACTORY.md); in Claude Code use `/new-page` and `/add-section`.
+
 ## Adding a page (repeatable workflow)
 **With Claude Code:** run `/new-page <reference-url> <slug> [title] [content source]`. The skill (`.claude/skills/new-page`)
 analyses the reference page's layout, maps each section to our blocks, builds the page from real IncubXperts content,

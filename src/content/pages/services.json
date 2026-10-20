@@ -1,0 +1,225 @@
+{
+  "path": "/services",
+  "reference": {
+    "name": "Azumo — AI Development Services",
+    "url": "https://azumo.com/artificial-intelligence"
+  },
+  "seo": {
+    "title": "Services — AI Strategy, Engineering & Cloud",
+    "description": "Purpose-built AI adoption, agentic solutions, workflow automation, AI-augmented engineering and QA, analytics, cloud and governance.",
+    "schemaType": "CollectionPage",
+    "summary": "IncubXperts services: AI adoption and strategy, agentic solutions, workflow automation, AI-augmented product engineering and QA, predictive analytics, MVPs, cloud and AI infrastructure, AI-first architecture and governance, and global capability centers."
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "dark",
+      "eyebrow": "Our services",
+      "title": "AI services built for real business impact",
+      "accentWord": "real business impact",
+      "subtitle": "From purpose-built strategies to autonomous agents, we combine AI-augmented engineering and human-led precision.",
+      "ctas": [
+        {
+          "label": "Speak with us",
+          "href": "/contact"
+        },
+        {
+          "label": "See our work",
+          "href": "/work",
+          "style": "secondary"
+        }
+      ]
+    },
+    {
+      "type": "richText",
+      "eyebrow": "Why it matters",
+      "heading": "Why purpose-driven AI adoption matters",
+      "bg": "light",
+      "paragraphs": [
+        "AI is reshaping every industry, yet most organizations struggle to turn investments into outcomes.",
+        "The challenge is not the technology. It is the lack of direction.",
+        "That is why we focus on purpose-built AI adoption, with strategies designed to deliver business impact from day one, backed by guardrails, ROI-driven roadmaps, cost-aware architectures and pilots that scale without unnecessary spend."
+      ],
+      "callout": {
+        "title": "Guardrails from day one",
+        "body": "Built-in guardrails, including model selection, cost parameters, and responsible AI guidelines, ensure every initiative is ethical, efficient, and scalable."
+      }
+    },
+    {
+      "type": "cardGrid",
+      "eyebrow": "What we do",
+      "heading": "Our services",
+      "bg": "surface",
+      "columns": 2,
+      "items": [
+        {
+          "title": "AI Adoption & Strategy",
+          "body": "Adopt AI with purpose-built strategies that create real business impact"
+        },
+        {
+          "title": "Agentic Solutions",
+          "body": "Building AI that thinks, collaborates, and delivers autonomously"
+        },
+        {
+          "title": "Workflow Automation",
+          "body": "Intelligent automation for seamless, self-operating workflows"
+        },
+        {
+          "title": "AI-Augmented Product Engineering",
+          "body": "Combining AI-augmented engineering and human-led precision to build AI-ready products"
+        },
+        {
+          "title": "AI-Augmented QA",
+          "body": "Maximize accuracy and accelerate your release cycles"
+        },
+        {
+          "title": "Predictive Analytics & BI",
+          "body": "Turn complex data into actionable intelligence with AI-driven analytics"
+        },
+        {
+          "title": "MVP in 10 Days",
+          "body": "Turn your idea into a working product with AI-accelerated, human-guided development"
+        },
+        {
+          "title": "Cloud & AI Infrastructure",
+          "body": "Power the next generation of applications with cloud infrastructure built for intelligence, automation, and scale"
+        },
+        {
+          "title": "AI-First Architecture & Governance",
+          "body": "Building resilient, AI-ready foundations for security and scale"
+        },
+        {
+          "title": "Global Capacity Center (GCC)",
+          "body": "Lean, progressively evolving, fully integrated Capability centers for SMB and Mid-market organizations"
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "eyebrow": "In depth",
+      "heading": "What each service includes",
+      "bg": "light",
+      "layout": "rail",
+      "tabs": [
+        {
+          "label": "AI Adoption & Strategy",
+          "title": "AI Adoption & Strategy",
+          "body": "AI has the potential to revolutionize businesses. Our services help organizations explore AI adoption, understand ROI, control TCO, and embed AI into their products and workflows.",
+          "points": [
+            "AI Feasibility & Readiness",
+            "High-Impact Opportunities",
+            "Adoption Roadmaps & Blueprints",
+            "Pilot Design & Scaling",
+            "TCO Optimization of AI Solutions",
+            "Governance, Compliance, & Cost",
+            "Use Case Patterns"
+          ]
+        },
+        {
+          "label": "Agentic Solutions",
+          "title": "Agentic Solutions",
+          "body": "We design and deliver agentic systems that combine reasoning, context, and collaboration to enable AI to operate autonomously across tools and data.",
+          "points": [
+            "Agentic System Design",
+            "Cognitive Workflow Automation",
+            "Agentic Integration for Existing Systems",
+            "Context Integration",
+            "Autonomous Knowledge Agents",
+            "Observability & Optimization",
+            "Deployment & Scale",
+            "Cost-Aware Agentic Architecture"
+          ]
+        },
+        {
+          "label": "Workflow Automation",
+          "title": "Workflow Automation",
+          "body": "Intelligent automation for seamless, self-operating workflows",
+          "points": [
+            "Workflow Orchestration",
+            "AI Action Chains",
+            "Data Flow Automation",
+            "System Integration & API Enablement",
+            "Ops & Finance Automation",
+            "IoT & Event Automation",
+            "Cost-Efficient Automation Architecture"
+          ]
+        },
+        {
+          "label": "Product Engineering",
+          "title": "AI-Augmented Product Engineering",
+          "body": "Combining AI-augmented engineering and human-led precision to build AI-ready products",
+          "points": [
+            "Architecture & Solution Design",
+            "Web Application Development",
+            "Mobile Application Development",
+            "Modernization & Sustained Engineering",
+            "Quality Engineering & Delivery Readiness",
+            "Rapid MVP Development"
+          ]
+        },
+        {
+          "label": "Cloud & AI Infrastructure",
+          "title": "Cloud & AI Infrastructure",
+          "body": "Power the next generation of applications with cloud infrastructure built for intelligence, automation, and scale",
+          "points": [
+            "Cloud & AI Readiness Assessment",
+            "Application & Platform Modernization",
+            "AI & Cloud Innovation POCs",
+            "Automation Infrastructure",
+            "Cloud Security & Compliance",
+            "Scalable Cloud Architecture",
+            "TCO Optimization for AI & Cloud Workloads"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "process",
+      "eyebrow": "Our process",
+      "heading": "Our process",
+      "bg": "surface",
+      "steps": [
+        {
+          "title": "Discover & Define",
+          "body": "Identify the right problems for agentic systems, where reasoning, autonomy, and context can drive meaningful efficiency or decision improvements."
+        },
+        {
+          "title": "Design the System",
+          "body": "Design agent roles, reasoning paths, memory, and safeguards. Select orchestration frameworks and LLMs aligned with governance needs and cost-aware scaling patterns."
+        },
+        {
+          "title": "Integrate Context",
+          "body": "Connect data, tools, and systems securely, using standards like MCP to enable agents to access live business context in real time."
+        },
+        {
+          "title": "Optimize & Scale",
+          "body": "Continuously refine accuracy, behavior, and impact using telemetry, controlled learning cycles, and optimization of usage patterns for long-term efficiency."
+        }
+      ]
+    },
+    {
+      "type": "caseStudies",
+      "eyebrow": "Case stories",
+      "heading": "Featured case stories",
+      "bg": "light",
+      "limit": 3,
+      "viewAll": {
+        "label": "See all case stories",
+        "href": "/work",
+        "style": "secondary"
+      }
+    },
+    {
+      "type": "cta",
+      "heading": "Ready to move from AI ambition to execution?",
+      "primary": {
+        "label": "Speak with us",
+        "href": "/contact"
+      },
+      "secondary": {
+        "label": "See our work",
+        "href": "/work"
+      }
+    }
+  ]
+}

@@ -98,6 +98,13 @@
               "pinned": {
                 "type": "boolean"
               },
+              "size": {
+                "type": "string",
+                "enum": [
+                  "md",
+                  "xl"
+                ]
+              },
               "subtitle": {
                 "type": "string"
               },
@@ -672,6 +679,23 @@
               },
               "filterable": {
                 "type": "boolean"
+              },
+              "align": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "center"
+                ]
+              },
+              "size": {
+                "type": "string",
+                "enum": [
+                  "md",
+                  "lg"
+                ]
+              },
+              "hint": {
+                "type": "string"
               },
               "limit": {
                 "type": "integer",

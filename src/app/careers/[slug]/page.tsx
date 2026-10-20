@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: PageProps<"/careers/[slug]">)
     title: `${job.title} — ${job.location}`,
     description: job.summary,
     path: `/careers/${job.slug}`,
+    noindex: job.example,
   });
 }
 
@@ -62,7 +63,8 @@ export default async function JobPage({ params }: PageProps<"/careers/[slug]">) 
 
   return (
     <>
-      <JsonLd data={ld} />
+      {/* Never publish JobPosting structured data for placeholder listings. */}
+      {!job.example && <JsonLd data={ld} />}
       <JsonLd data={breadcrumbLd(crumbs)} />
       <section className="bg-surface py-14 sm:py-20">
         <Container>
@@ -76,7 +78,10 @@ export default async function JobPage({ params }: PageProps<"/careers/[slug]">) 
               ))}
             </ol>
           </nav>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-link">{job.department}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-link">
+            {job.department}
+            {job.example && <span className="ml-3 rounded-full bg-amber-200 px-3 py-1 text-xs font-bold normal-case tracking-normal text-amber-950">Example role</span>}
+          </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-semibold sm:text-6xl">{job.title}</h1>
           <p className="mt-4 text-lg text-muted">
             {job.location} · {job.experience} · {job.employmentType.replace("_", " ").toLowerCase()}

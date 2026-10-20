@@ -1,0 +1,57 @@
+{
+  "header": [
+    {
+      "label": "Services",
+      "href": "/services"
+    },
+    {
+      "label": "Work",
+      "href": "/work"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "label": "Careers",
+      "href": "/careers"
+    }
+  ],
+  "footer": [
+    {
+      "title": "Company",
+      "links": [
+        {
+          "label": "About us",
+          "href": "/about"
+        },
+        {
+          "label": "Careers",
+          "href": "/careers"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "title": "Work",
+      "links": [
+        {
+          "label": "Case studies",
+          "href": "/work"
+        }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        {
+          "label": "Privacy policy",
+          "href": "/privacy"
+        }
+      ]
+    }
+  ]
+}

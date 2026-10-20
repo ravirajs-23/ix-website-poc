@@ -30,6 +30,8 @@ export type Job = {
   responsibilities: string[];
   requirements: string[];
   featured?: boolean;
+  /** Placeholder listing: shown with an "Example role" label, never emitted as JobPosting data, noindex, not in sitemap/llms.txt. */
+  example?: boolean;
   postedAt: string; // ISO date
   validThrough?: string; // ISO date
 };

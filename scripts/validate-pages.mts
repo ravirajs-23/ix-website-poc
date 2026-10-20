@@ -10,7 +10,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { pageSchema, type PageDefinition } from "../src/blocks/schema.ts";
+import { navigationSchema, pageSchema, type PageDefinition } from "../src/blocks/schema.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pagesDir = path.join(root, "src", "content", "pages");
@@ -115,6 +115,29 @@ for (const { file, page } of parsed) {
       }
     }
   });
+}
+
+// Header and footer menus: valid shape, every internal link points at a real page.
+{
+  const navFile = "navigation.json";
+  const navPath = path.join(root, "src", "content", navFile);
+  if (existsSync(navPath)) {
+    let rawNav: unknown;
+    try {
+      rawNav = JSON.parse(readFileSync(navPath, "utf8"));
+    } catch (e) {
+      add("error", navFile, `Invalid JSON: ${(e as Error).message}`);
+    }
+    const res = rawNav === undefined ? undefined : navigationSchema.safeParse(rawNav);
+    if (res && !res.success) for (const issue of res.error.issues) add("error", navFile, `${issue.path.join(".") || "(root)"}: ${issue.message}`);
+    if (res?.success) {
+      const links = [...res.data.header, ...res.data.footer.flatMap((g) => g.links)];
+      for (const l of links) {
+        if (/^(https?:|mailto:|tel:)/.test(l.href)) continue;
+        if (!pages.has(l.href.split(/[?#]/)[0])) add("error", navFile, `menu link "${l.label}" points to "${l.href}", which is not a page`);
+      }
+    }
+  }
 }
 
 const errors = findings.filter((f) => f.level === "error");
