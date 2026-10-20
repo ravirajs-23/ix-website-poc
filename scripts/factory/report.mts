@@ -53,7 +53,10 @@ function row(label: string, b: number | string | undefined, a: number | string |
     else if (!material(b, d, opts)) mark = "≈ negligible";
     else mark = good ? "✅" : "⚠️";
   }
-  const delta = opts.fmt ? (d > 0 ? "+" : d < 0 ? "−" : "") + opts.fmt(Math.abs(d)) : `${d > 0 ? "+" : ""}${Math.round(d * 100) / 100}`;
+  const mag = opts.fmt ? opts.fmt(Math.abs(d)) : "";
+  // A change that rounds to zero ("0 KB") shows as ±0, never "−0".
+  const sign = /^0(\D|$)/.test(mag) ? "±" : d > 0 ? "+" : d < 0 ? "−" : "";
+  const delta = opts.fmt ? sign + mag : `${d > 0 ? "+" : ""}${Math.round(d * 100) / 100}`;
   return `| ${label} | ${f(b)} | ${f(a)} | ${d === 0 ? "no change" : delta} ${mark} |`;
 }
 

@@ -6,7 +6,7 @@
  * Specs:
  *   live:<url>[#Section heading]     text/images from a live page (e.g. https://incubxperts.com/about-us);
  *                                    "#Heading" keeps only that section (and its sub-sections)
- *   strapi:<collection>[?query]      entries from Strapi's REST API, read-only. Needs STRAPI_URL and STRAPI_TOKEN.
+ *   strapi:<collection>[?query]      entries from Strapi's REST API, read-only. Needs FACTORY_STRAPI_URL and FACTORY_STRAPI_TOKEN.
  *                                    query examples: limit=3  |  filters[slug][$eq]=my-case  |  sort=DisplayOrderNumber
  *   file:<path>                      manual content: .md (headings, paragraphs, bullets, ![alt](src)), .txt, or .json
  *
@@ -179,8 +179,11 @@ function entryToSection(entry: Record<string, unknown>, collection: string, base
 }
 
 async function fromStrapi(spec: string): Promise<ContentSection[]> {
-  const baseRaw = process.env.STRAPI_URL;
-  if (!baseRaw) throw new Error("strapi: set STRAPI_URL (e.g. http://localhost:1337) and STRAPI_TOKEN (read-only API token) in .env.local or the shell.");
+  // FACTORY_* are the authoring-time settings. STRAPI_* are what the SITE reads at build time, so they are only a fallback:
+  // keep the factory's Strapi separate from the site's data source whenever they could differ.
+  const baseRaw = process.env.FACTORY_STRAPI_URL ?? process.env.STRAPI_URL;
+  const token = process.env.FACTORY_STRAPI_TOKEN ?? process.env.STRAPI_TOKEN;
+  if (!baseRaw) throw new Error("strapi: set FACTORY_STRAPI_URL (e.g. http://localhost:1337) and FACTORY_STRAPI_TOKEN (read-only API token) in .env.local or the shell.");
   const base = baseRaw.replace(/\/$/, "");
   const [collection, query = ""] = spec.split("?");
   const params = new URLSearchParams(query);
@@ -189,13 +192,13 @@ async function fromStrapi(spec: string): Promise<ContentSection[]> {
   params.set("pagination[pageSize]", limit);
   params.set("populate", "*");
   const res = await fetch(`${base}/api/${collection}?${params}`, {
-    headers: process.env.STRAPI_TOKEN ? { Authorization: `Bearer ${process.env.STRAPI_TOKEN}` } : {},
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
     signal: AbortSignal.timeout(15000),
   }).catch((e) => {
     throw new Error(`strapi: cannot reach ${base} (${e.message}). Is Strapi running?`);
   });
   if (res.status === 401 || res.status === 403)
-    throw new Error(`strapi: HTTP ${res.status} for ${collection}. Create a read-only API token (Strapi admin > Settings > API Tokens) and set STRAPI_TOKEN, or allow "find" for this collection.`);
+    throw new Error(`strapi: HTTP ${res.status} for ${collection}. Create a read-only API token (Strapi admin > Settings > API Tokens) and set FACTORY_STRAPI_TOKEN, or allow "find" for this collection.`);
   if (!res.ok) throw new Error(`strapi: HTTP ${res.status} for ${collection}`);
   const json = (await res.json()) as { data?: Record<string, unknown>[] | Record<string, unknown> };
   const rows = Array.isArray(json.data) ? json.data : json.data ? [json.data] : [];

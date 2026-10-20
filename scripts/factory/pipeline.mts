@@ -101,9 +101,19 @@ function listPages(): string[] {
 }
 
 export async function interactiveIntake(runDir: string): Promise<Brief> {
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  // Read lines through a buffered async iterator: answers that arrive all at once (piped or pasted input)
+  // are queued instead of being lost between questions, and running out of input is a clear error.
+  const rl = readline.createInterface({ input: process.stdin });
+  const lines = rl[Symbol.asyncIterator]();
+  const readLine = async (prompt: string): Promise<string> => {
+    process.stdout.write(prompt);
+    const { value, done } = await lines.next();
+    if (done) throw new Error("The input ended before all the questions were answered. Run it again, or use --brief <file> to skip the questions.");
+    if (!process.stdin.isTTY) process.stdout.write(`${value}\n`); // echo piped answers so the log reads like a session
+    return value as string;
+  };
   const ask = async (q: string, def?: string) => {
-    const a = (await rl.question(`  ${q}${def ? ` [${def}]` : ""}: `)).trim();
+    const a = (await readLine(`  ${q}${def ? ` [${def}]` : ""}: `)).trim();
     return a || def || "";
   };
   try {
@@ -136,7 +146,7 @@ export async function interactiveIntake(runDir: string): Promise<Brief> {
     const content: string[] = [];
     console.log("\n  Content sources (where the words come from). Add as many as you like:");
     console.log("    live:<url>[#Heading]   text from a live page, e.g. live:https://incubxperts.com/about-us#Leadership");
-    console.log("    strapi:<collection>    entries from Strapi (needs STRAPI_URL + STRAPI_TOKEN), e.g. strapi:testimonials?limit=3");
+    console.log("    strapi:<collection>    entries from Strapi (needs FACTORY_STRAPI_URL + FACTORY_STRAPI_TOKEN), e.g. strapi:testimonials?limit=3");
     console.log("    file:<path>            a .md / .txt / .json file");
     console.log("    text                   type or paste it now");
     for (;;) {
@@ -146,7 +156,7 @@ export async function interactiveIntake(runDir: string): Promise<Brief> {
         console.log("  Type or paste the content (Markdown is fine). Finish with a line containing only END:");
         const lines: string[] = [];
         for (;;) {
-          const l = await rl.question("  > ");
+          const l = await readLine("  > ");
           if (l.trim() === "END") break;
           lines.push(l);
         }

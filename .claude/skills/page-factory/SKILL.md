@@ -16,7 +16,7 @@ People guide: `docs/PAGE-FACTORY.md`. Arguments: `$ARGUMENTS` (use them to pre-f
 3. **Client confidentiality.** Case studies stay anonymized; never use a Strapi internal-name field; CMS images are copied locally with neutral names automatically. Never put a client name in alt text.
 4. **Only existing blocks and props** (`src/blocks/schema.ts` is strict; `src/blocks/catalog.ts` says when to use each). If nothing fits, follow "New block or variant" in `/new-page`.
 5. **Never bypass site protections.** If the reference blocks automated browsers, retry with `--headed` (a normal visible Chrome window). If it still blocks or shows a challenge, stop and tell the user. No user-agent spoofing, no solving challenges.
-6. **Secrets**: for `strapi:` content the user puts `STRAPI_URL` and a read-only `STRAPI_TOKEN` in `.env.local`; never ask them to paste it into chat. For the automatic engine, `ANTHROPIC_API_KEY` goes in `.env.local` too.
+6. **Secrets**: for `strapi:` content the user puts `FACTORY_STRAPI_URL` and a read-only `FACTORY_STRAPI_TOKEN` in `.env.local` (not `STRAPI_*`, which change what the site builds); never ask them to paste it into chat. For the automatic engine, `ANTHROPIC_API_KEY` goes in `.env.local` too.
 7. **Do not push or open pull requests unless asked.** Work on a branch (`feature/page-<slug>` or `feature/section-<page>-<name>`). When asked to push, push to BOTH remotes (`origin` GitLab and `github`; GitHub is the source of truth), fast-forward only.
 
 ## Step 1 — Intake (ask, don't guess)
