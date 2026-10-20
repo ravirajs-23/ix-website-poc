@@ -1,9 +1,9 @@
 {
+  "path": "/about",
   "reference": {
     "name": "Azumo — About Us",
     "url": "https://azumo.com/us"
   },
-  "path": "/about",
   "seo": {
     "title": "About Us — Our Story, Team & Milestones",
     "description": "Learn how IncubXperts grew into an AI-native engineering partner, our journey, key milestones, and the team behind our AI-first delivery.",
@@ -20,9 +20,9 @@
     },
     {
       "type": "richText",
-      "bg": "light",
       "eyebrow": "How we got our start",
       "heading": "A decade of building intelligent software",
+      "bg": "light",
       "paragraphs": [
         "IncubXperts was established in 2017 as a private limited organisation, with a focus on helping companies design, build and scale software that matters.",
         "Marked 10 years of IncubXperts, a decade of building AI-native software and technology solutions. Scaled our AI Bootcamp program threefold, from 36 to 99 associates, shipping working AI agents across document processing, remittance automation, loan underwriting, and Salesforce-based sales workflows.",
@@ -33,20 +33,20 @@
         "body": "We deepen our agentic AI expertise through Claude ecosystem training and certification."
       },
       "media": {
-        "side": "right",
         "image": {
           "src": "https://incubxperts.com/images/header/whoweare.webp",
           "alt": "The IncubXperts team"
-        }
+        },
+        "side": "right"
       }
     },
     {
       "type": "stats",
-      "bg": "dark",
-      "layout": "split",
       "eyebrow": "IncubXperts at a glance",
       "heading": "A proven partner for AI-native engineering",
       "intro": "IncubXperts is an AI-native engineering partner for product companies and enterprises, helping them design, build, and scale intelligent software.",
+      "bg": "dark",
+      "layout": "split",
       "items": [
         {
           "value": "150+",
@@ -79,9 +79,9 @@
     },
     {
       "type": "badges",
-      "bg": "surface",
       "eyebrow": "Recognition and partnerships",
       "heading": "Certified, connected and accountable",
+      "bg": "surface",
       "items": [
         {
           "name": "Registered Anthropic partner"
@@ -111,24 +111,45 @@
     },
     {
       "type": "testimonials",
-      "variant": "carousel",
-      "split": true,
-      "bg": "light",
       "eyebrow": "Customers",
       "heading": "Leaders prefer us",
       "intro": "Product companies and enterprises trust IncubXperts to build and scale their software.",
+      "bg": "light",
+      "variant": "carousel",
+      "split": true,
       "cta": {
         "label": "See our work",
         "href": "/work"
       }
     },
     {
+      "type": "cardGrid",
+      "eyebrow": "Press",
+      "heading": "In the press",
+      "bg": "surface",
+      "columns": 3,
+      "items": [
+        {
+          "title": "Economic Times",
+          "body": "IncubXperts expands AI practice",
+          "href": "https://example.com/et",
+          "linkLabel": "Read the article"
+        },
+        {
+          "title": "Hindustan Times",
+          "body": "IncubXperts expands AI practice",
+          "href": "https://example.com/et",
+          "linkLabel": "Read the article"
+        }
+      ]
+    },
+    {
       "type": "tabs",
       "anchor": "how-we-deliver",
-      "layout": "rail",
-      "bg": "surface",
       "eyebrow": "How we deliver",
       "heading": "What makes IncubXperts different",
+      "bg": "surface",
+      "layout": "rail",
       "tabs": [
         {
           "label": "AI-native advantage",
@@ -168,9 +189,9 @@
     },
     {
       "type": "process",
-      "bg": "light",
       "eyebrow": "Engagement models",
       "heading": "Work with us the way that suits you",
+      "bg": "light",
       "steps": [
         {
           "title": "Time and Materials (T&M)",
@@ -200,15 +221,15 @@
     },
     {
       "type": "cardGrid",
-      "variant": "portrait",
-      "bg": "surface",
       "eyebrow": "Leadership",
       "heading": "The team behind IncubXperts",
+      "bg": "surface",
+      "variant": "portrait",
       "items": [
         {
           "title": "Anish Betawadkar",
-          "tag": "Co-Founder & Director",
           "body": "A recreational cyclist, Anish has been fitness inclined for the past few years. He bikes to work a couple of times a week, and on other days he…",
+          "tag": "Co-Founder & Director",
           "image": {
             "src": "https://incubxperts.com/images/Leadership/anish.webp",
             "alt": "Anish Betawadkar, Co-Founder & Director at IncubXperts"
@@ -216,8 +237,8 @@
         },
         {
           "title": "Dr. Preetam Tiwari",
-          "tag": "Co-Founder & Director",
           "body": "An Artist by heart, by brain, and by everything you can go by….yes, he doesn’t spare technology too!",
+          "tag": "Co-Founder & Director",
           "image": {
             "src": "https://incubxperts.com/images/Leadership/preetamimg.webp",
             "alt": "Dr. Preetam Tiwari, Co-Founder & Director at IncubXperts"
@@ -225,8 +246,8 @@
         },
         {
           "title": "Rahul Bagal",
-          "tag": "Co-Founder & Director",
           "body": "If Rahul was not a technologist, he would have been a High Tech farmer! He has a great interest in soil, farming, and harvesting crops.",
+          "tag": "Co-Founder & Director",
           "image": {
             "src": "https://incubxperts.com/images/Leadership/rahulimg.webp",
             "alt": "Rahul Bagal, Co-Founder & Director at IncubXperts"
@@ -234,8 +255,8 @@
         },
         {
           "title": "Amit Dhandal",
-          "tag": "Co-Founder & Director",
           "body": "A trekker and foodie, Amit loves to apply his analytical skills everywhere. With his apt sense of Indian politics and vast general knowledge, you can…",
+          "tag": "Co-Founder & Director",
           "image": {
             "src": "https://incubxperts.com/images/AboutUs/amitsir.webp",
             "alt": "Amit Dhandal, Co-Founder & Director at IncubXperts"
@@ -245,8 +266,8 @@
     },
     {
       "type": "locations",
-      "bg": "light",
       "heading": "Our offices",
+      "bg": "light",
       "items": [
         {
           "city": "Pune, India",
