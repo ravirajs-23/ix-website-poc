@@ -74,6 +74,8 @@ export function buildPromptPack(args: {
   referenceDir: string;
   refSectionMatch?: string;
   content: ContentBundle;
+  /** Free-text instructions from the requester (tone, emphasis, constraints). */
+  notes?: string;
   retry?: { previousDraft: unknown; errors: string[] };
 }): PromptPack {
   const { target, reference, content } = args;
@@ -90,6 +92,8 @@ export function buildPromptPack(args: {
   );
   parts.push(`REFERENCE (${reference.url}) — structure only; text is truncated on purpose and must NOT be reused:\n${JSON.stringify({ title: reference.title, sections: refSections.map((s) => Object.fromEntries(Object.entries(s).filter(([k]) => k !== "screenshot"))) }, null, 1)}`);
   parts.push(`CONTENT (the ONLY source of facts and images). Sources: ${content.sources.join(", ")}\n${JSON.stringify(content.sections, null, 1)}`);
+  if (args.notes) parts.push(`REQUESTER NOTES (follow these unless they conflict with the hard rules):
+${args.notes}`);
   if (target.mode === "section") parts.push(`EXISTING PAGE JSON (do not repeat what is already there; match its rhythm):\n${JSON.stringify(target.page, null, 1)}`);
   if (args.retry) parts.push(`YOUR PREVIOUS DRAFT FAILED VALIDATION. Fix every error and return the corrected full output.\nPrevious draft:\n${JSON.stringify(args.retry.previousDraft)}\nErrors:\n${args.retry.errors.map((e) => `- ${e}`).join("\n")}`);
 

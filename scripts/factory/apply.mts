@@ -131,7 +131,8 @@ export async function applyDraft(args: {
   // 4) write, validate, roll back on failure
   mkdirSync(pagesDir, { recursive: true });
   touched.push({ file, before: existsSync(file) ? readFileSync(file, "utf8") : null });
-  writeFileSync(path.join(runDir, "before.json"), touched[0].before ?? "null\n");
+  // Not "before.json": that name is the pipeline's baseline measurement snapshot.
+  writeFileSync(path.join(runDir, "page-before.json"), touched[0].before ?? "null\n");
   writeFileSync(file, JSON.stringify(finalPage, null, 2) + "\n");
   if (meta.mode === "page" && meta.nav) {
     const siteFile = path.join(root, "src", "lib", "site.ts");

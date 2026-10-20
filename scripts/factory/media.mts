@@ -84,3 +84,20 @@ export async function localizeImagesIn(value: unknown, log: (m: string) => void 
   await Promise.all(jobs);
   return count;
 }
+
+/** Import an image file the user supplied: re-encode to a compressed WebP named from its CONTENT hash (never its file name). */
+export async function importLocalImage(file: string): Promise<string> {
+  const { default: sharp } = await import("sharp");
+  const abs = path.resolve(file);
+  if (!existsSync(abs)) throw new Error(`image file not found: ${abs}`);
+  const input = readFileSync(abs);
+  const outDir = path.join(root, "public", "factory-media");
+  mkdirSync(outDir, { recursive: true });
+  const name = `fm-${createHash("sha1").update(input).digest("hex").slice(0, 10)}.webp`;
+  const dest = path.join(outDir, name);
+  if (!existsSync(dest)) {
+    const isSvg = /\.svg$/i.test(abs) || input.subarray(0, 300).toString("utf8").includes("<svg");
+    await sharp(input, isSvg ? { density: 144 } : {}).resize({ width: 1200, withoutEnlargement: !isSvg }).webp({ quality: 80 }).toFile(dest);
+  }
+  return `/factory-media/${name}`;
+}

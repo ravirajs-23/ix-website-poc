@@ -1,6 +1,15 @@
 /**
  * PAGE FACTORY — one command to create a page, or add a section, from a reference URL + your content.
  *
+ *   npm run factory -- run [--brief brief.json]     THE FULL SEQUENCE: asks the questions (or reads the brief), measures the
+ *                                                   site, builds the page/section, measures again, writes the before/after
+ *                                                   SEO report and posts it on the pull request. Saves progress after each step.
+ *   npm run factory -- resume --run <run folder>    continue a paused/failed run (e.g. after draft.json was written)
+ *   npm run factory -- report --run <run folder>    re-render report.md from the saved measurements (no re-measuring)
+ *   npm run factory -- publish --run <run folder>   (re)post a run's report as a pull-request comment [--pr N]
+ *   flags for run/resume: --engine api|prompt  --headed  --no-measure  --skip-baseline  --strict-grounding  --pr N
+ *
+ *   Single stages and the older direct commands:
  *   npm run factory -- page    --reference <url> --slug services --title "Services" \
  *                              --content live:https://incubxperts.com/services/ai-adoption-and-strategy \
  *                              [--content strapi:case-stories?limit=3] [--content file:notes.md] [--nav "Services"]
@@ -24,6 +33,7 @@ import { capture, ReferenceBlockedError, type ReferenceCapture } from "./capture
 import { loadContent, type ContentBundle } from "./content.mts";
 import { buildPromptPack, callApi, DEFAULT_MODEL, writePromptPack, type Target } from "./generate.mts";
 import { groundingReport } from "./ground.mts";
+import { publishRun, regenerateReport, runPipeline, type Flags } from "./pipeline.mts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -170,6 +180,33 @@ async function main() {
     if (!res.ok) process.exitCode = 3;
     return;
   }
+  if (cmd === "run" || cmd === "resume") {
+    // The whole ordered pipeline: intake -> baseline -> capture -> content -> generate -> apply -> after -> report -> publish
+    const flagsObj: Flags = {
+      engine: flag("engine"),
+      model: flag("model"),
+      headed: has("headed") || undefined,
+      force: has("force"),
+      strictGrounding: has("strict-grounding"),
+      retries: flag("retries") !== undefined ? Number(flag("retries")) : undefined,
+      skipBaseline: has("skip-baseline"),
+      noMeasure: has("no-measure"),
+      pr: flag("pr") !== undefined ? Number(flag("pr")) : undefined,
+    };
+    if (cmd === "resume" && !flag("run")) die("Usage: npm run factory -- resume --run <run folder>");
+    process.exitCode = await runPipeline({ runDir: cmd === "resume" ? flag("run") : undefined, briefFile: flag("brief"), flags: flagsObj });
+    return;
+  }
+  if (cmd === "report") {
+    if (!flag("run")) die("Usage: npm run factory -- report --run <run folder>   (re-renders report.md from the saved measurements)");
+    console.log(`report written: ${regenerateReport(flag("run")!)}`);
+    return;
+  }
+  if (cmd === "publish") {
+    if (!flag("run")) die("Usage: npm run factory -- publish --run <run folder> [--pr <number>]");
+    process.exitCode = publishRun(flag("run")!, flag("pr") !== undefined ? Number(flag("pr")) : undefined);
+    return;
+  }
   if (cmd === "page" || cmd === "section") {
     const referenceUrl = flag("reference");
     const contentSpecs = flagAll("content");
@@ -203,10 +240,17 @@ async function main() {
     }
     return;
   }
-  console.log(readFileSync(fileURLToPath(import.meta.url), "utf8").split("*/")[0].replace(/^\/\*\*\n/, "").replace(/^ \* ?/gm, ""));
+  console.log(readFileSync(fileURLToPath(import.meta.url), "utf8").split("*/")[0].replace(/^\/\*\*\r?\n/, "").replace(/^ \* ?/gm, "").trim());
 }
 
 main().catch((e) => {
+  const issues = (e as { issues?: { path: (string | number)[]; message: string }[] }).issues;
+  if ((e as Error).name === "ZodError" && Array.isArray(issues)) {
+    console.error("\nThe brief is not valid:");
+    for (const i of issues) console.error(`  - ${i.path.join(".") || "(root)"}: ${i.message}`);
+    process.exitCode = 1;
+    return;
+  }
   if ((e as Error).message !== "__factory_exit__") {
     console.error(`\n${(e as Error).message}`);
     process.exitCode = process.exitCode || 1;
