@@ -56,7 +56,7 @@ export function resolveInsertIndex(page: PageDefinition, spec: InsertSpec | unde
   return { index: blocks.length, description: "at the end of the page" };
 }
 
-function runValidator(): { errors: string[]; warnings: string[] } {
+export function runValidator(): { errors: string[]; warnings: string[] } {
   const r = spawnSync(process.execPath, ["--disable-warning=MODULE_TYPELESS_PACKAGE_JSON", "scripts/validate-pages.mts"], { cwd: root, encoding: "utf8" });
   const lines = `${r.stdout}\n${r.stderr}`.split("\n").map((l) => l.trim());
   return {
@@ -135,12 +135,13 @@ export async function applyDraft(args: {
   writeFileSync(path.join(runDir, "page-before.json"), touched[0].before ?? "null\n");
   writeFileSync(file, JSON.stringify(finalPage, null, 2) + "\n");
   if (meta.mode === "page" && meta.nav) {
-    const siteFile = path.join(root, "src", "lib", "site.ts");
-    const src = readFileSync(siteFile, "utf8");
-    const re = /(export const nav: NavItem\[\] = \[\r?\n)([\s\S]*?)(\];)/;
-    if (re.test(src) && !src.includes(`href: "/${meta.slug}"`)) {
-      touched.push({ file: siteFile, before: src });
-      writeFileSync(siteFile, src.replace(re, (_m, a, body, c) => `${a}${body}  { label: ${JSON.stringify(meta.nav)}, href: "/${meta.slug}" },\n${c}`));
+    const navFile = path.join(root, "src", "content", "navigation.json");
+    const src = readFileSync(navFile, "utf8");
+    const navData = JSON.parse(src) as { header: { label: string; href: string }[] };
+    if (!navData.header.some((n) => n.href === `/${meta.slug}`)) {
+      touched.push({ file: navFile, before: src });
+      navData.header.push({ label: meta.nav, href: `/${meta.slug}` });
+      writeFileSync(navFile, JSON.stringify(navData, null, 2) + "\n");
     }
   }
   const v = runValidator();

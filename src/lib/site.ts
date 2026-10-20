@@ -1,3 +1,5 @@
+import navigation from "@/content/navigation.json";
+
 // Central site configuration. Replace SITE_URL via env when the production domain is decided.
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
@@ -34,31 +36,11 @@ export const site = {
 
 export type NavItem = { label: string; href: string };
 
-export const nav: NavItem[] = [
-  { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
-  { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
-];
+// Menus live in src/content/navigation.json so they can be edited without touching code
+// (the page factory's `edit menu` command writes that file).
+export const nav: NavItem[] = navigation.header;
 
-export const footerNav: { title: string; links: NavItem[] }[] = [
-  {
-    title: "Company",
-    links: [
-      { label: "About us", href: "/about" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Work",
-    links: [{ label: "Case studies", href: "/work" }],
-  },
-  {
-    title: "Legal",
-    links: [{ label: "Privacy policy", href: "/privacy" }],
-  },
-];
+export const footerNav: { title: string; links: NavItem[] }[] = navigation.footer;
 
 export function absoluteUrl(path = "/") {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;

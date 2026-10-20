@@ -83,6 +83,26 @@ npm run factory -- section --page careers --reference https://www.cohesity.com/c
 
 Then: `npm run build`, review the page, commit on a branch, open a pull request.
 
+## Changing what already exists (no reference page needed)
+For marketers the `/page-factory` skill drives all of this as a friendly conversation; the commands below are what it runs. Every change is **previewed in plain words, validated against the site rules, undone automatically if invalid, and (by default) measured before and after**, with a 3-line plain-language verdict in `verdict.txt` and the full report in `report.md`.
+
+| Goal | Command |
+|---|---|
+| See pages, sections, images and menus | `npm run factory -- edit list` |
+| Move a section | `edit move-section --page P --section "S" (--after "X" \| --before "X" \| --to start\|end)` |
+| Remove a section | `edit remove-section --page P --section "S" --yes` |
+| Update text / layout of a section, or a page's SEO title and description | `edit update --page P [--section "S"] --patch changes.json` (JSON with only the fields to change; arrays are replaced whole; page-level patches may only touch `seo` and `reference`) |
+| Replace a photo | `edit replace-image --page P --section "S" --image file --alt "description" [--which N]` (re-encoded to WebP with a neutral hashed name) |
+| Remove a page | `edit remove-page --slug S --yes` (also removes its menu links; refuses while other pages still link to it) |
+| Change a menu | `edit menu add\|rename\|remove\|move --area header\|footer [--group "Company"] --label X [--href /x] [--new-label Y] [--position N]` |
+
+Flags: `--dry-run` (preview only), `--no-measure`, `--runs 3`. Removals need `--yes`. Sections are matched by exact or partial heading, `#<number>` or `type:<kind>`; an ambiguous match lists the candidates instead of guessing. The hero cannot be moved or removed. Menus live in `src/content/navigation.json` (validated; every internal link must be a real page).
+Theme changes (colours, fonts, spacing) are deliberately **not** automated: the skill declines and points to a developer.
+
+## Reviewing and sending (no git knowledge needed)
+- `npm run factory -- shots --path /careers --out .factory/shots` writes full-page **desktop and phone** screenshots of the built site.
+- `npm run factory -- ship --title "Add Our Values page" --run .factory/runs/<run>` creates a branch (if on `main`), commits, pushes to **both GitHub and GitLab** (fast-forward only, never forced), opens the GitHub pull request (the quick verdict goes in the description) and posts the full report as a comment. `--dry-run` shows what it would do; `--no-pr` pushes only. It needs git and `gh` sign-in on that machine; if pushing fails it says so in plain words and leaves the work saved locally. Nothing reaches the live site until a developer merges the pull request.
+
 ## What it guarantees
 - **Schema-valid or nothing**: the draft must pass the strict block schema and `npm run validate:pages` (one hero, links and anchors, image hosts, no placeholder text). Failures are rolled back; the site is never left broken.
 - **No invented content**: every text item is matched to your sources. Numbers that are not in the sources are always flagged. Add `--strict-grounding` to make any flagged text a hard failure.
@@ -107,6 +127,6 @@ Then: `npm run build`, review the page, commit on a branch, open a pull request.
 | a page already exists | pick another `--slug` or add `--force` |
 
 ## Where things live
-`scripts/factory/` (capture, content, generate, ground, apply, media, serve, measure, report, pipeline, index) · `src/blocks/schema.ts` (the contract) ·
+`scripts/factory/` (capture, content, generate, ground, apply, media, serve, measure, report, pipeline, edit, editrun, shots, ship, index) · `src/blocks/schema.ts` (the contract) ·
 `src/blocks/catalog.ts` (when to use each block) · `.claude/skills/page-factory` (+ `new-page`, `add-section` entry points) ·
 `.factory/` (run folders and briefs; git-ignored).

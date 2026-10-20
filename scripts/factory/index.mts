@@ -20,6 +20,18 @@
  *   npm run factory -- apply   --run .factory/runs/<run>        apply a draft.json you (or Claude Code) wrote
  *   npm run factory -- capture <url> | content <spec>...         run a single stage
  *
+ *   Changing what is already there (no reference page needed; checked, undone if invalid, measured before/after):
+ *   npm run factory -- ship --title "Add Our Values page" [--run <run folder>] [--no-pr]   branch + commit + push to both remotes + pull request
+ *   npm run factory -- shots --path /careers [--out dir] [--rebuild]      desktop + phone screenshots of a built page
+ *   npm run factory -- edit list                                    pages, sections, images and menus
+ *   npm run factory -- edit move-section   --page about --section "Our values" (--after X | --before X | --to start|end)
+ *   npm run factory -- edit remove-section --page about --section "Our values" --yes
+ *   npm run factory -- edit update         --page about [--section "Our values"] --patch changes.json
+ *   npm run factory -- edit replace-image  --page about --section "Our story" --image photo.jpg --alt "Team at an offsite" [--which N]
+ *   npm run factory -- edit remove-page    --slug old-page --yes
+ *   npm run factory -- edit menu add|rename|remove|move --area header|footer [--group Company] --label X [--href /x] [--new-label Y] [--position N]
+ *   edit flags: --dry-run (preview only)  --no-measure  --runs 3  --port 3199
+ *
  * Engines:  --engine api     fully automatic (needs ANTHROPIC_API_KEY; model via FACTORY_MODEL / --model)
  *           --engine prompt  (default when no key) writes a prompt pack; Claude Code answers it (see the skills)
  * Other flags: --headed (visible Chrome for sites that block headless) --force --strict-grounding --retries 2
@@ -32,6 +44,10 @@ import { applyDraft, resolveInsertIndex, type InsertSpec, type RunMeta } from ".
 import { capture, ReferenceBlockedError, type ReferenceCapture } from "./capture.mts";
 import { loadContent, type ContentBundle } from "./content.mts";
 import { buildPromptPack, callApi, DEFAULT_MODEL, writePromptPack, type Target } from "./generate.mts";
+import { listSite, planMenu, planMoveSection, planRemovePage, planRemoveSection, planReplaceImage, planUpdate, type MenuArgs, type Plan } from "./edit.mts";
+import { runEdit } from "./editrun.mts";
+import { ship } from "./ship.mts";
+import { takeShots } from "./shots.mts";
 import { groundingReport } from "./ground.mts";
 import { publishRun, regenerateReport, runPipeline, type Flags } from "./pipeline.mts";
 
@@ -57,8 +73,13 @@ for (let i = 1; i < argv.length; i++) {
   const val = next !== undefined && !next.startsWith("--") ? (i++, next) : "true";
   flags.set(k, [...(flags.get(k) ?? []), val]);
 }
-const flag = (k: string) => flags.get(k)?.[flags.get(k)!.length - 1];
-const flagAll = (k: string) => flags.get(k) ?? [];
+// Git Bash on Windows rewrites an argument like /careers into "C:/Program Files/Git/careers"; undo that.
+const unmsys = (v: string) => v.replace(/^[A-Za-z]:[\/]Program Files[\/]Git(?=[\/])/, "");
+const flag = (k: string) => {
+  const v = flags.get(k)?.[flags.get(k)!.length - 1];
+  return v === undefined ? v : unmsys(v);
+};
+const flagAll = (k: string) => (flags.get(k) ?? []).map(unmsys);
 const has = (k: string) => flags.has(k);
 const log = (m: string) => console.log(`  ${m}`);
 
@@ -205,6 +226,58 @@ async function main() {
   if (cmd === "publish") {
     if (!flag("run")) die("Usage: npm run factory -- publish --run <run folder> [--pr <number>]");
     process.exitCode = publishRun(flag("run")!, flag("pr") !== undefined ? Number(flag("pr")) : undefined);
+    return;
+  }
+  if (cmd === "ship") {
+    const title = flag("title");
+    if (!title || title === "true") die('Usage: npm run factory -- ship --title "Add Our Values page" [--run .factory/runs/<run>] [--branch name] [--no-pr]');
+    const r = ship({ title, run: flag("run"), branch: flag("branch"), noPr: has("no-pr"), dryRun: has("dry-run"), log });
+    console.log(`
+${r.message}`);
+    if (r.prUrl) console.log(`Pull request: ${r.prUrl}`);
+    if (r.skipped.length) console.log(`Not sent to: ${r.skipped.join("; ")}`);
+    process.exitCode = r.ok ? 0 : 1;
+    return;
+  }
+  if (cmd === "shots") {
+    const p = flag("path");
+    if (!p) die("Usage: npm run factory -- shots --path /careers [--out .factory/shots] [--rebuild]");
+    const files = await takeShots({ pagePath: p, outDir: flag("out") ?? path.join(".factory", "shots"), rebuild: has("rebuild"), log });
+    for (const f of files) console.log(f);
+    return;
+  }
+  if (cmd === "edit") {
+    const op = argv[1];
+    const need = (k: string, why = `--${k} is required.`) => flag(k) ?? die(why);
+    if (op === "list") {
+      const site = listSite();
+      for (const p of site.pages) {
+        console.log(`
+${p.path}  (${p.slug}.json)  “${p.title}”`);
+        for (const s of p.sections) console.log(`  #${s.index} ${s.type} — ${s.name}${s.images ? `  [${s.images} image(s)]` : ""}`);
+      }
+      console.log(`
+Top menu:  ${site.navigation.header.map((n) => `${n.label} (${n.href})`).join(" · ")}`);
+      for (const g of site.navigation.footer) console.log(`Footer / ${g.title}:  ${g.links.map((n) => `${n.label} (${n.href})`).join(" · ")}`);
+      return;
+    }
+    let plan: Plan;
+    if (op === "move-section") plan = planMoveSection({ page: need("page"), section: need("section"), after: flag("after"), before: flag("before"), to: flag("to") as "start" | "end" | undefined });
+    else if (op === "remove-section") plan = planRemoveSection({ page: need("page"), section: need("section") });
+    else if (op === "update") {
+      const patchFile = path.resolve(root, need("patch", "--patch <file.json> is required (a JSON file with just the fields to change)."));
+      if (!existsSync(patchFile)) die(`Patch file not found: ${patchFile}`);
+      plan = await planUpdate({ page: need("page"), section: flag("section"), patch: JSON.parse(readFileSync(patchFile, "utf8")), log });
+    } else if (op === "replace-image") plan = await planReplaceImage({ page: need("page"), section: need("section"), file: need("image", "--image <file> is required."), alt: need("alt", "--alt \"short description of the photo\" is required."), which: flag("which") });
+    else if (op === "remove-page") plan = planRemovePage({ slug: need("slug") });
+    else if (op === "menu") {
+      const action = argv[2] as MenuArgs["action"];
+      if (!["add", "rename", "remove", "move"].includes(action)) die("Usage: edit menu add|rename|remove|move --area header|footer --label <name> ...");
+      const area = need("area") as MenuArgs["area"];
+      if (area !== "header" && area !== "footer") die('--area must be "header" or "footer".');
+      plan = planMenu({ action, area, group: flag("group"), label: need("label"), href: flag("href"), newLabel: flag("new-label"), position: flag("position") !== undefined ? Number(flag("position")) : undefined });
+    } else die("Usage: npm run factory -- edit list | move-section | remove-section | update | replace-image | remove-page | menu   (see --help)");
+    process.exitCode = await runEdit(plan, { measure: !has("no-measure"), yes: has("yes"), dryRun: has("dry-run"), runs: Number(flag("runs") ?? 3), port: Number(flag("port") ?? 3199) });
     return;
   }
   if (cmd === "page" || cmd === "section") {

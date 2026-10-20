@@ -28,7 +28,7 @@ import { loadContent, type ContentBundle } from "./content.mts";
 import { buildPromptPack, callApi, DEFAULT_MODEL, writePromptPack, type Target } from "./generate.mts";
 import { importLocalImage } from "./media.mts";
 import { measurePage, measureSite } from "./measure.mts";
-import { renderReport, type ReportInput, type Snapshot } from "./report.mts";
+import { renderReport, shortVerdict, type ReportInput, type Snapshot } from "./report.mts";
 import { buildSite, startServer } from "./serve.mts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -121,36 +121,39 @@ export async function interactiveIntake(runDir: string): Promise<Brief> {
     const mode = ((await ask("Create a whole new PAGE, or add a SECTION to an existing page? (page/section)", "section")).toLowerCase().startsWith("p") ? "page" : "section") as "page" | "section";
     const brief: Record<string, unknown> = { mode };
     if (mode === "page") {
-      const slug = await ask("URL slug for the new page, e.g. services (becomes /services)");
-      if (!slugRe.test(slug)) throw new Error("slug must be lowercase letters, digits and hyphens");
+      const title = await ask("What should the page be called? (e.g. Industries)");
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      if (!slugRe.test(slug)) throw new Error("Please use a name with some letters or numbers in it.");
+      console.log(`  It will live at /${slug}`);
       brief.slug = slug;
-      brief.title = await ask("Page title", slug.charAt(0).toUpperCase() + slug.slice(1));
-      const nav = await ask("Header navigation label (blank = not in the nav)");
-      if (nav) brief.nav = nav;
+      brief.title = title;
+      const nav = (await ask("Show it in the top menu? (yes/no)", "yes")).toLowerCase().startsWith("y");
+      if (nav) brief.nav = title;
     } else {
       const pages = listPages();
       console.log(`  Existing pages: ${pages.join(", ")}`);
-      const page = await ask("Which page gets the new section?");
+      const page = await ask("Which page should it go on? (type one of the names above)");
       if (!pages.includes(page)) throw new Error(`no page "${page}"`);
       brief.page = page;
       const pj = pageSchema.parse(readJson(path.join(root, "src", "content", "pages", `${page}.json`)));
       console.log("  Sections on that page:");
       pj.blocks.forEach((b, i) => console.log(`    ${i}. ${b.type}${(b as { heading?: string }).heading ? ` — ${(b as { heading?: string }).heading}` : ""}`));
-      const where = await ask("Insert AFTER which section? (number or heading text; blank = before the closing call-to-action)");
+      const where = await ask("Place it after which section? (type its number; Enter = near the end, before the closing banner)");
       if (where) brief.insert = /^\d+$/.test(where) ? { after: pj.blocks[Number(where)] ? (((pj.blocks[Number(where)] as { heading?: string }).heading) ?? `type:${pj.blocks[Number(where)].type}`) : where } : { after: where };
     }
-    const refUrl = await ask("Reference URL (the page whose LAYOUT to follow)");
-    const refSection = mode === "section" ? await ask("Which section of that page? (its heading, e.g. How we work)") : "";
+    const refUrl = await ask("Link to the website page whose LOOK you'd like to copy");
+    const refSection = mode === "section" ? await ask("Which part of that page do you like? (type its heading, e.g. How we work)") : "";
     brief.reference = { url: refUrl, ...(refSection ? { section: refSection } : {}) };
 
     const content: string[] = [];
-    console.log("\n  Content sources (where the words come from). Add as many as you like:");
-    console.log("    live:<url>[#Heading]   text from a live page, e.g. live:https://incubxperts.com/about-us#Leadership");
-    console.log("    strapi:<collection>    entries from Strapi (needs FACTORY_STRAPI_URL + FACTORY_STRAPI_TOKEN), e.g. strapi:testimonials?limit=3");
-    console.log("    file:<path>            a .md / .txt / .json file");
-    console.log("    text                   type or paste it now");
+    console.log("\n  Where should the words come from? You can add several, one at a time.");
+    console.log("    type            I'll type or paste the text now");
+    console.log("    <web link>      a page on our current website");
+    console.log("    <file path>     a text file on this computer");
+    console.log("    strapi:<name>   from our content system (needs a one-time key; ask a developer)");
     for (;;) {
-      const c = await ask("Add a content source (blank to finish)");
+      const raw = await ask("Add a source (press Enter when you're done)");
+      const c = !raw || raw === "type" || raw === "text" ? (raw ? "text" : "") : /^https?:\/\//i.test(raw) ? `live:${raw}` : /^(live|file|strapi):/.test(raw) ? raw : `file:${raw}`;
       if (!c) break;
       if (c === "text") {
         console.log("  Type or paste the content (Markdown is fine). Finish with a line containing only END:");
@@ -167,27 +170,34 @@ export async function interactiveIntake(runDir: string): Promise<Brief> {
     }
     brief.content = content;
 
-    const imgMode = (await ask("Images: use the ones found in the content, use your own files, or none? (content/files/none)", "content")) as "content" | "files" | "none";
+    const imgAns = (await ask("Photos: use the ones already in the content, your own files, or none? (content/own/none)", "content")).toLowerCase();
+    const imgMode = (imgAns.startsWith("o") || imgAns.startsWith("f") ? "files" : imgAns.startsWith("n") ? "none" : "content") as "content" | "files" | "none";
     const images: Record<string, unknown> = { mode: imgMode };
     if (imgMode === "files") {
       const files: { path: string; alt: string }[] = [];
       for (;;) {
-        const p = await ask("Image file path (blank to finish)");
+        const p = await ask("Photo file location (press Enter when you're done)");
         if (!p) break;
-        files.push({ path: p, alt: await ask("  Describe what the image shows (alt text; no client or brand names)") });
+        files.push({ path: p, alt: await ask("  In a few words, what does the photo show? (no client or brand names)") });
       }
       images.files = files;
     }
     brief.images = images;
-    const notes = await ask("Anything else the generator should know? (tone, emphasis, what to avoid; blank = none)");
+    const notes = await ask("Anything special to keep in mind? (tone, what to emphasise or avoid; Enter to skip)");
     if (notes) brief.notes = notes;
-    const measure = (await ask("Measure SEO/performance before and after? (yes/no)", "yes")).toLowerCase().startsWith("y");
+    const measure = (await ask("Check SEO and speed before and after, and compare? (adds ~5-8 min) (yes/no)", "yes")).toLowerCase().startsWith("y");
     brief.measure = { enabled: measure, runs: 3, port: 3199 };
-    const pr = (await ask("Post the before/after report as a comment on the pull request? (yes/no)", "yes")).toLowerCase().startsWith("y");
+    const pr = (await ask("Post that comparison on the pull request? (yes/no)", "no")).toLowerCase().startsWith("y");
     brief.publish = { prComment: pr };
     const parsed = briefSchema.parse(brief);
-    console.log("\n  Summary:\n" + JSON.stringify(parsed, null, 2).replace(/^/gm, "    "));
-    if (!(await ask("Go ahead? (yes/no)", "yes")).toLowerCase().startsWith("y")) throw new Pause(1, "cancelled");
+    const srcs = content.map((c) => (c.startsWith("live:") ? `page ${c.slice(5)}` : c.startsWith("strapi:") ? "our content system" : "typed/file text")).join(", ") || "none";
+    console.log("\n  Here's the plan:");
+    console.log(`    • ${mode === "page" ? `Create a new page "${parsed.title}" at /${parsed.slug}${parsed.nav ? " (in the top menu)" : ""}` : `Add a new section to the ${parsed.page} page`}`);
+    console.log(`    • Look: ${refUrl}${refSection ? ` ("${refSection}")` : ""}`);
+    console.log(`    • Words from: ${srcs}`);
+    console.log(`    • Photos: ${imgMode === "content" ? "from the content" : imgMode === "files" ? "your own" : "none"}`);
+    console.log(`    • Before/after SEO and speed check: ${measure ? "yes" : "no"}`);
+    if (!(await ask("\n  Shall I go ahead? (yes/no)", "yes")).toLowerCase().startsWith("y")) throw new Pause(1, "cancelled");
     return parsed;
   } finally {
     rl.close();
@@ -408,6 +418,7 @@ export async function runPipeline(opts: { runDir?: string; briefFile?: string; f
       writeJson(f("report-input.json"), input); // lets `factory report --run` re-render without re-measuring
       const md = renderReport(input);
       writeFileSync(f("report.md"), md);
+      writeFileSync(f("verdict.txt"), `${shortVerdict(input).join("\n")}\n`); // the 3-line plain-language summary
       log(`report written: ${path.relative(root, f("report.md"))}`);
     });
 

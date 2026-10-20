@@ -281,3 +281,11 @@ export type LocationsBlock = z.infer<typeof locationsSchema>;
 export type ContactBlock = z.infer<typeof contactSchema>;
 export type Block = z.infer<typeof blockSchema>;
 export type PageDefinition = z.infer<typeof pageSchema>;
+
+/** src/content/navigation.json: the header and footer menus. */
+export const navLinkSchema = z.strictObject({ label: z.string().min(1), href: z.string().min(1) });
+export const navigationSchema = z.strictObject({
+  header: z.array(navLinkSchema),
+  footer: z.array(z.strictObject({ title: z.string().min(1), links: z.array(navLinkSchema).min(1) })),
+});
+export type Navigation = z.infer<typeof navigationSchema>;
